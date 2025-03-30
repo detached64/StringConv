@@ -265,5 +265,12 @@ namespace StringConv
             }
             return bytes;
         }
+
+        private void About_Click(object sender, RoutedEventArgs e)
+        {
+            AboutBox aboutBox = new AboutBox();
+            aboutBox.Owner = this;
+            aboutBox.ShowDialog();
+        }
     }
 }
