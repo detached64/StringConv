@@ -1,11 +1,11 @@
+using System.Diagnostics;
 using System.Reflection;
+using System.Web.UI.WebControls;
 using System.Windows;
+using System.Windows.Documents;
 
 namespace StringConv
 {
-    /// <summary>
-    /// AboutBox.xaml 的交互逻辑
-    /// </summary>
     public partial class AboutBox : Window
     {
         public AboutBox()
@@ -17,7 +17,11 @@ namespace StringConv
         {
             this.TextName.Text = $"{Application.ResourceAssembly.GetName().Name} {Application.ResourceAssembly.GetName().Version}";
             this.TextCopyright.Text = Assembly.GetExecutingAssembly().GetCustomAttribute<AssemblyCopyrightAttribute>().Copyright;
-            this.TextLink.Text = "https://github.com/detached64/StringConv";
+        }
+
+        private void Hyperlink_Click(object sender, RoutedEventArgs e)
+        {
+            Process.Start(((Hyperlink)sender).NavigateUri.AbsoluteUri);
         }
     }
 }
