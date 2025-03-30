@@ -97,7 +97,10 @@
                  Background="#FF313131"
                  FontFamily="Consolas"
                  Foreground="LightGray"
-                 IsReadOnly="True" />
+                 InputMethod.IsInputMethodEnabled="False"
+                 PreviewKeyDown="TextHex_PreviewKeyDown"
+                 PreviewTextInput="TextHex_PreviewTextInput"
+                 TextChanged="HexChanged" />
         <StackPanel Grid.Row="4"
                     Grid.Column="1"
                     Margin="0"

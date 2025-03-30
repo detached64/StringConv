@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -49,7 +51,7 @@ namespace StringConv
 
         private byte[] ProcessString(string input, TextBox sender)
         {
-            if (string.IsNullOrWhiteSpace(input))
+            if (string.IsNullOrEmpty(input))
             {
                 return null;
             }
@@ -203,6 +205,65 @@ namespace StringConv
         {
             this.TextASCII.Clear();
             this.TextToCopy.Clear();
+        }
+
+        private void HexChanged(object sender, TextChangedEventArgs e)
+        {
+            if (IsUpdating)
+            {
+                return;
+            }
+            IsUpdating = true;
+            // In case of pasting
+            string cleaned = new string(this.TextHex.Text.Where(c => Uri.IsHexDigit(c)).ToArray()).ToUpper();
+            StringBuilder formatted = new StringBuilder();
+            for (int i = 0; i < cleaned.Length; i++)
+            {
+                if (i % 2 == 0 && i > 0)
+                {
+                    formatted.Append(" ");
+                }
+                formatted.Append(cleaned[i]);
+            }
+            this.TextHex.Text = formatted.ToString().TrimEnd();
+            this.TextHex.SelectionStart = formatted.Length;
+            // Check if the string is valid hex
+            if (!string.IsNullOrEmpty(this.TextHex.Text) && (this.TextHex.Text.Length + 1) % 3 != 0)
+            {
+                IsUpdating = false;
+                return;
+            }
+            // Convert to byte array
+            Input = HexStringToByteArray(cleaned);
+            UpdateAscii(this.TextHex);
+            UpdateUnicode(this.TextHex);
+            UpdateCustom(this.TextHex);
+            GenerateCopyString();
+            UpdateByteCount();
+            IsUpdating = false;
+        }
+
+        private void TextHex_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !Regex.IsMatch(e.Text, "^[0-9A-Fa-f]$");
+        }
+
+        private void TextHex_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+            {
+                e.Handled = true;
+            }
+        }
+
+        public byte[] HexStringToByteArray(string hex)
+        {
+            byte[] bytes = new byte[hex.Length / 2];
+            for (int i = 0; i < hex.Length; i += 2)
+            {
+                bytes[i / 2] = Convert.ToByte(hex.Substring(i, 2), 16);
+            }
+            return bytes;
         }
     }
 }
