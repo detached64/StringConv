@@ -70,14 +70,16 @@ namespace StringConv
 
         private void GenerateCopyString()
         {
-            TextCopy = new StringToCopy();
-            TextCopy.TextASCII = this.TextASCII.Text;
-            TextCopy.TextUnicode = this.TextUnicode.Text;
-            TextCopy.TextCustomEncoding = this.TextCustomEncoding.Text;
-            TextCopy.TextHex = this.TextHex.Text.Replace(" ", string.Empty);
-            TextCopy.TextHexWithSpace = this.TextHex.Text;
-            TextCopy.TextHexWithHyphen = this.TextHex.Text.Replace(" ", "-");
-            TextCopy.TextBase64 = Input == null ? string.Empty : Convert.ToBase64String(Input);
+            TextCopy = new StringToCopy
+            {
+                TextASCII = this.TextASCII.Text,
+                TextUnicode = this.TextUnicode.Text,
+                TextCustomEncoding = this.TextCustomEncoding.Text,
+                TextHex = this.TextHex.Text.Replace(" ", string.Empty),
+                TextHexWithSpace = this.TextHex.Text,
+                TextHexWithHyphen = this.TextHex.Text.Replace(" ", "-"),
+                TextBase64 = Input == null ? string.Empty : Convert.ToBase64String(Input)
+            };
         }
 
         private void UpdateByteCount()
@@ -226,20 +228,16 @@ namespace StringConv
                 formatted.Append(cleaned[i]);
             }
             this.TextHex.Text = formatted.ToString().TrimEnd();
-            this.TextHex.SelectionStart = formatted.Length;
-            // Check if the string is valid hex
-            if (!string.IsNullOrEmpty(this.TextHex.Text) && (this.TextHex.Text.Length + 1) % 3 != 0)
+            this.TextHex.SelectionStart = this.TextHex.Text.Length;
+            if (string.IsNullOrEmpty(this.TextHex.Text) || (this.TextHex.Text.Length + 1) % 3 == 0)
             {
-                IsUpdating = false;
-                return;
+                Input = HexStringToByteArray(cleaned);
+                UpdateAscii(this.TextHex);
+                UpdateUnicode(this.TextHex);
+                UpdateCustom(this.TextHex);
+                GenerateCopyString();
+                UpdateByteCount();
             }
-            // Convert to byte array
-            Input = HexStringToByteArray(cleaned);
-            UpdateAscii(this.TextHex);
-            UpdateUnicode(this.TextHex);
-            UpdateCustom(this.TextHex);
-            GenerateCopyString();
-            UpdateByteCount();
             IsUpdating = false;
         }
 
