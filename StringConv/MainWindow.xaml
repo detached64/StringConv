@@ -5,7 +5,7 @@
         xmlns:local="clr-namespace:StringConv"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         Title="StringConv"
-        Width="800"
+        Width="850"
         Height="500"
         Background="#FF2E323A"
         FontSize="15"
@@ -31,6 +31,7 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
@@ -48,9 +49,8 @@
                       Grid.Row="2"
                       Margin="10,10,10,10"
                       HorizontalAlignment="Stretch"
-                      DisplayMemberPath="Name"
+                      DisplayMemberPath="EncodingName"
                       Foreground="#FF313131"
-                      SelectedValuePath="CodePage"
                       SelectionChanged="CombCustomEncoding_SelectionChanged" />
             <TextBlock Grid.Row="3"
                        Margin="10,10,10,10"
@@ -61,13 +61,18 @@
                        Margin="10,10,10,10"
                        HorizontalAlignment="Left"
                        Foreground="LightGray"
-                       Text="Copy" />
+                       Text="Formatted Hex" />
             <TextBlock Grid.Row="5"
                        Margin="10,10,10,10"
                        HorizontalAlignment="Left"
                        Foreground="LightGray"
-                       Text="String to Copy" />
+                       Text="Copy" />
             <TextBlock Grid.Row="6"
+                       Margin="10,10,10,10"
+                       HorizontalAlignment="Left"
+                       Foreground="LightGray"
+                       Text="String to Copy" />
+            <TextBlock Grid.Row="7"
                        Margin="10,10,10,10"
                        HorizontalAlignment="Left"
                        Foreground="LightGray"
@@ -100,18 +105,23 @@
                      Grid.Row="3"
                      Grid.Column="1"
                      Margin="10,10,10,10"
-                     HorizontalAlignment="Stretch"
                      Background="#FF313131"
-                     FontFamily="Consolas"
                      Foreground="LightGray"
                      InputMethod.IsInputMethodEnabled="False"
                      PreviewKeyDown="TextHex_PreviewKeyDown"
                      PreviewTextInput="TextHex_PreviewTextInput"
-                     TextChanged="HexChanged" />
-            <StackPanel Grid.Row="4"
-                        Grid.Column="1"
-                        Margin="0"
-                        Orientation="Horizontal">
+                     TextChanged="TextChanged" />
+            <TextBox x:Name="TextFormattedHex"
+                     Grid.Row="4"
+                     Grid.Column="1"
+                     Margin="10,10,10,10"
+                     Background="#FF313131"
+                     Foreground="LightGray"
+                     IsReadOnly="True" />
+            <WrapPanel Grid.Row="5"
+                       Grid.Column="1"
+                       Margin="0"
+                       Orientation="Horizontal">
                 <Button Name="BtnCopyASCII"
                         Margin="10,10,5,10"
                         Click="BtnCopyClick"
@@ -154,9 +164,9 @@
                         Content="Base64"
                         MouseEnter="BtnMouseEnter"
                         MouseLeave="BtnMouseLeave" />
-            </StackPanel>
+            </WrapPanel>
             <TextBox Name="TextToCopy"
-                     Grid.Row="5"
+                     Grid.Row="6"
                      Grid.Column="1"
                      Margin="10,10,10,10"
                      HorizontalAlignment="Stretch"
@@ -164,7 +174,7 @@
                      Background="#FF313131"
                      Foreground="LightGray"
                      IsReadOnly="True" />
-            <Grid Grid.Row="6" Grid.Column="1">
+            <Grid Grid.Row="7" Grid.Column="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />

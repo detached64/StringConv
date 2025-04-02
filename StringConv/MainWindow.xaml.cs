@@ -12,7 +12,7 @@ namespace StringConv
     public partial class MainWindow : Window
     {
         private bool IsUpdating = false;
-        private Encoding CustomEncoding => Encoding.GetEncoding(int.Parse(this.CombCustomEncoding.SelectedValue.ToString()));
+        private Encoding SelectedEncoding => this.CombCustomEncoding.SelectedItem as Encoding;
         public byte[] Input = null;
         private StringToCopy TextCopy = new StringToCopy();
 
@@ -23,11 +23,11 @@ namespace StringConv
             this.CombCustomEncoding.SelectedIndex = Settings.Default.SelectedEncodingIndex;
         }
 
-        private List<CustomEncoding> Items => new List<CustomEncoding>()
+        private List<Encoding> Items => new List<Encoding>()
         {
-            new CustomEncoding(65001, "UTF-8"),
-            new CustomEncoding(932, "Shift-JIS"),
-            new CustomEncoding(936, "GBK"),
+            Encoding.UTF8,
+            Encoding.GetEncoding(932),
+            Encoding.GetEncoding(936),
         };
 
         private void TextChanged(object sender, TextChangedEventArgs e)
@@ -44,6 +44,7 @@ namespace StringConv
             UpdateUnicode(textBox);
             UpdateCustom(textBox);
             UpdateHex(textBox);
+            UpdateFormattedHex(textBox);
             GenerateCopyString();
             UpdateByteCount();
             IsUpdating = false;
@@ -62,7 +63,9 @@ namespace StringConv
                 case "TextUnicode":
                     return Encoding.Unicode.GetBytes(input);
                 case "TextCustomEncoding":
-                    return CustomEncoding.GetBytes(input);
+                    return SelectedEncoding.GetBytes(input);
+                case "TextHex":
+                    return HexStringToByteArray(new string(input.Where(c => Uri.IsHexDigit(c)).ToArray()).ToUpper());
                 default:
                     throw new Exception("Unknown sender");
             }
@@ -75,9 +78,9 @@ namespace StringConv
                 TextASCII = this.TextASCII.Text,
                 TextUnicode = this.TextUnicode.Text,
                 TextCustomEncoding = this.TextCustomEncoding.Text,
-                TextHex = this.TextHex.Text.Replace(" ", string.Empty),
-                TextHexWithSpace = this.TextHex.Text,
-                TextHexWithHyphen = this.TextHex.Text.Replace(" ", "-"),
+                TextHex = this.TextFormattedHex.Text.Replace(" ", string.Empty),
+                TextHexWithSpace = this.TextFormattedHex.Text,
+                TextHexWithHyphen = this.TextFormattedHex.Text.Replace(" ", "-"),
                 TextBase64 = Input == null ? string.Empty : Convert.ToBase64String(Input)
             };
         }
@@ -131,7 +134,7 @@ namespace StringConv
             }
             else
             {
-                this.TextCustomEncoding.Text = CustomEncoding.GetString(Input);
+                this.TextCustomEncoding.Text = SelectedEncoding.GetString(Input);
             }
         }
 
@@ -148,6 +151,22 @@ namespace StringConv
             else
             {
                 this.TextHex.Text = BitConverter.ToString(Input).Replace("-", " ");
+            }
+        }
+
+        private void UpdateFormattedHex(TextBox sender)
+        {
+            if (sender == this.TextFormattedHex)
+            {
+                return;
+            }
+            if (Input == null || Input.Length == 0)
+            {
+                this.TextFormattedHex.Text = string.Empty;
+            }
+            else
+            {
+                this.TextFormattedHex.Text = BitConverter.ToString(Input).Replace("-", " ");
             }
         }
 
@@ -199,7 +218,7 @@ namespace StringConv
         {
             Settings.Default.SelectedEncodingIndex = this.CombCustomEncoding.SelectedIndex;
             Settings.Default.Save();
-            this.BtnCopyCustomEncoding.Content = ((CustomEncoding)this.CombCustomEncoding.SelectedItem).Name;
+            this.BtnCopyCustomEncoding.Content = SelectedEncoding.WebName.ToUpper();
             TextChanged(this.TextCustomEncoding, null);
         }
 
@@ -207,38 +226,6 @@ namespace StringConv
         {
             this.TextASCII.Clear();
             this.TextToCopy.Clear();
-        }
-
-        private void HexChanged(object sender, TextChangedEventArgs e)
-        {
-            if (IsUpdating)
-            {
-                return;
-            }
-            IsUpdating = true;
-            // In case of pasting
-            string cleaned = new string(this.TextHex.Text.Where(c => Uri.IsHexDigit(c)).ToArray()).ToUpper();
-            StringBuilder formatted = new StringBuilder();
-            for (int i = 0; i < cleaned.Length; i++)
-            {
-                if (i % 2 == 0 && i > 0)
-                {
-                    formatted.Append(" ");
-                }
-                formatted.Append(cleaned[i]);
-            }
-            this.TextHex.Text = formatted.ToString().TrimEnd();
-            this.TextHex.SelectionStart = this.TextHex.Text.Length;
-            if (string.IsNullOrEmpty(this.TextHex.Text) || (this.TextHex.Text.Length + 1) % 3 == 0)
-            {
-                Input = HexStringToByteArray(cleaned);
-                UpdateAscii(this.TextHex);
-                UpdateUnicode(this.TextHex);
-                UpdateCustom(this.TextHex);
-                GenerateCopyString();
-                UpdateByteCount();
-            }
-            IsUpdating = false;
         }
 
         private void TextHex_PreviewTextInput(object sender, TextCompositionEventArgs e)
@@ -256,6 +243,11 @@ namespace StringConv
 
         public byte[] HexStringToByteArray(string hex)
         {
+            if (string.IsNullOrEmpty(hex) || hex.Length % 2 != 0)
+            {
+                return null;
+            }
+
             byte[] bytes = new byte[hex.Length / 2];
             for (int i = 0; i < hex.Length; i += 2)
             {
