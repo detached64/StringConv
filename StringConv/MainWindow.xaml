@@ -5,16 +5,14 @@
         xmlns:local="clr-namespace:StringConv"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         Title="StringConv"
-        Width="850"
+        Width="700"
         Height="500"
         Background="#FF2E323A"
-        FontSize="15"
         WindowStartupLocation="CenterScreen"
         mc:Ignorable="d">
     <DockPanel>
         <Menu Background="#FF282C34"
               DockPanel.Dock="Top"
-              FontSize="15"
               Foreground="LightGray">
             <MenuItem Click="About_Click" Header="About" />
         </Menu>
@@ -108,7 +106,6 @@
                      Background="#FF313131"
                      Foreground="LightGray"
                      InputMethod.IsInputMethodEnabled="False"
-                     PreviewKeyDown="TextHex_PreviewKeyDown"
                      PreviewTextInput="TextHex_PreviewTextInput"
                      TextChanged="TextChanged" />
             <TextBox x:Name="TextFormattedHex"

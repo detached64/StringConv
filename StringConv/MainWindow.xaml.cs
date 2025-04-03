@@ -87,7 +87,7 @@ namespace StringConv
 
         private void UpdateByteCount()
         {
-            this.TextByteCount.Text = Input == null ? "0" : Input.Length.ToString();
+            this.TextByteCount.Text = Input == null ? (this.TextHex.Text.Length == 0 ? "0" : "Parse error") : Input.Length.ToString();
         }
 
         private void UpdateAscii(TextBox sender)
@@ -231,14 +231,6 @@ namespace StringConv
         private void TextHex_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             e.Handled = !Regex.IsMatch(e.Text, "^[0-9A-Fa-f]$");
-        }
-
-        private void TextHex_PreviewKeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Space)
-            {
-                e.Handled = true;
-            }
         }
 
         public byte[] HexStringToByteArray(string hex)
