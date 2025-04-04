@@ -66,8 +66,8 @@
     <Compile Include="AboutBox.xaml.cs">
       <DependentUpon>AboutBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CustomEncodings.cs" />
     <Compile Include="Settings.cs" />
-    <Compile Include="StringToCopy.cs" />
     <Page Include="AboutBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

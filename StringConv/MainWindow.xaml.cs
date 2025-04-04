@@ -1,34 +1,24 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace StringConv
 {
-    public partial class MainWindow : Window
+    public sealed partial class MainWindow : Window
     {
         private bool IsUpdating = false;
-        private Encoding SelectedEncoding => this.CombCustomEncoding.SelectedItem as Encoding;
         public byte[] Input = null;
-        private StringToCopy TextCopy = new StringToCopy();
 
         public MainWindow()
         {
             InitializeComponent();
-            this.CombCustomEncoding.ItemsSource = Items;
-            this.CombCustomEncoding.SelectedIndex = Settings.Default.SelectedEncodingIndex;
+            AddCustomEncodings();
         }
-
-        private List<Encoding> Items => new List<Encoding>()
-        {
-            Encoding.UTF8,
-            Encoding.GetEncoding(932),
-            Encoding.GetEncoding(936),
-        };
 
         private void TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -40,12 +30,9 @@ namespace StringConv
             TextBox textBox = (TextBox)sender;
             string input = textBox.Text;
             Input = ProcessString(input, textBox);
-            UpdateAscii(textBox);
-            UpdateUnicode(textBox);
-            UpdateCustom(textBox);
+            UpdateStrings(textBox);
             UpdateHex(textBox);
             UpdateFormattedHex(textBox);
-            GenerateCopyString();
             UpdateByteCount();
             IsUpdating = false;
         }
@@ -56,33 +43,14 @@ namespace StringConv
             {
                 return null;
             }
-            switch (sender.Name)
+            if (sender.Name == "TextHex")
             {
-                case "TextASCII":
-                    return Encoding.ASCII.GetBytes(input);
-                case "TextUnicode":
-                    return Encoding.Unicode.GetBytes(input);
-                case "TextCustomEncoding":
-                    return SelectedEncoding.GetBytes(input);
-                case "TextHex":
-                    return HexStringToByteArray(new string(input.Where(c => Uri.IsHexDigit(c)).ToArray()).ToUpper());
-                default:
-                    throw new Exception("Unknown sender");
+                return HexStringToByteArray(new string(input.Where(c => Uri.IsHexDigit(c)).ToArray()).ToUpper());
             }
-        }
-
-        private void GenerateCopyString()
-        {
-            TextCopy = new StringToCopy
+            else
             {
-                TextASCII = this.TextASCII.Text,
-                TextUnicode = this.TextUnicode.Text,
-                TextCustomEncoding = this.TextCustomEncoding.Text,
-                TextHex = this.TextFormattedHex.Text.Replace(" ", string.Empty),
-                TextHexWithSpace = this.TextFormattedHex.Text,
-                TextHexWithHyphen = this.TextFormattedHex.Text.Replace(" ", "-"),
-                TextBase64 = Input == null ? string.Empty : Convert.ToBase64String(Input)
-            };
+                return Encoding.GetEncoding(int.Parse(sender.Tag.ToString())).GetBytes(input);
+            }
         }
 
         private void UpdateByteCount()
@@ -90,51 +58,22 @@ namespace StringConv
             this.TextByteCount.Text = Input == null ? (this.TextHex.Text.Length == 0 ? "0" : "Parse error") : Input.Length.ToString();
         }
 
-        private void UpdateAscii(TextBox sender)
+        private void UpdateStrings(TextBox sender)
         {
-            if (sender == this.TextASCII)
+            foreach (TextBox box in this.GridString.Children.OfType<TextBox>())
             {
-                return;
-            }
-            if (Input == null || Input.Length == 0)
-            {
-                this.TextASCII.Text = string.Empty;
-            }
-            else
-            {
-                this.TextASCII.Text = Encoding.ASCII.GetString(Input);
-            }
-        }
-
-        private void UpdateUnicode(TextBox sender)
-        {
-            if (sender == this.TextUnicode)
-            {
-                return;
-            }
-            if (Input == null || Input.Length == 0)
-            {
-                this.TextUnicode.Text = string.Empty;
-            }
-            else
-            {
-                this.TextUnicode.Text = Encoding.Unicode.GetString(Input);
-            }
-        }
-
-        private void UpdateCustom(TextBox sender)
-        {
-            if (sender == this.TextCustomEncoding)
-            {
-                return;
-            }
-            if (Input == null || Input.Length == 0)
-            {
-                this.TextCustomEncoding.Text = string.Empty;
-            }
-            else
-            {
-                this.TextCustomEncoding.Text = SelectedEncoding.GetString(Input);
+                if (box == sender)
+                {
+                    continue;
+                }
+                if (Input == null || Input.Length == 0 || box.Tag == null)
+                {
+                    box.Text = string.Empty;
+                }
+                else
+                {
+                    box.Text = Encoding.GetEncoding(int.Parse(box.Tag.ToString())).GetString(Input);
+                }
             }
         }
 
@@ -172,63 +111,50 @@ namespace StringConv
 
         private void BtnMouseEnter(object sender, MouseEventArgs e)
         {
-            switch (((Button)sender).Name)
+            object tag = ((Button)sender).Tag;
+            if (tag != null)
             {
-                case "BtnCopyASCII":
-                    this.TextToCopy.Text = TextCopy.TextASCII;
-                    break;
-                case "BtnCopyUnicode":
-                    this.TextToCopy.Text = TextCopy.TextUnicode;
-                    break;
-                case "BtnCopyCustomEncoding":
-                    this.TextToCopy.Text = TextCopy.TextCustomEncoding;
-                    break;
-                case "BtnCopyHex":
-                    this.TextToCopy.Text = TextCopy.TextHex;
-                    break;
-                case "BtnCopyHexWithSpace":
-                    this.TextToCopy.Text = TextCopy.TextHexWithSpace;
-                    break;
-                case "BtnCopyHexWithHyphen":
-                    this.TextToCopy.Text = TextCopy.TextHexWithHyphen;
-                    break;
-                case "BtnCopyBase64":
-                    this.TextToCopy.Text = TextCopy.TextBase64;
-                    break;
-                default:
-                    throw new Exception("Unknown sender");
+                this.TextToCopy.Text = Input == null || Input.Length == 0 ? string.Empty : Encoding.GetEncoding(int.Parse(tag.ToString())).GetString(Input);
             }
-        }
-
-        private void BtnMouseLeave(object sender, MouseEventArgs e)
-        {
-            //this.TextToCopy.Clear();
+            else
+            {
+                switch (((Button)sender).Name)
+                {
+                    case "BtnCopyHex":
+                        this.TextToCopy.Text = this.TextFormattedHex.Text.Replace(" ", string.Empty);
+                        break;
+                    case "BtnCopyHexWithSpace":
+                        this.TextToCopy.Text = this.TextFormattedHex.Text;
+                        break;
+                    case "BtnCopyHexWithHyphen":
+                        this.TextToCopy.Text = this.TextFormattedHex.Text.Replace(" ", "-");
+                        break;
+                    case "BtnCopyBase64":
+                        this.TextToCopy.Text = Input == null ? string.Empty : Convert.ToBase64String(Input);
+                        break;
+                    default:
+                        MessageBox.Show("Unknown button", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        break;
+                }
+            }
         }
 
         private void BtnCopyClick(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(this.TextToCopy.Text))
+            if (string.IsNullOrEmpty(this.TextToCopy.Text))
             {
                 return;
             }
             Clipboard.SetDataObject(this.TextToCopy.Text);
         }
 
-        private void CombCustomEncoding_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            Settings.Default.SelectedEncodingIndex = this.CombCustomEncoding.SelectedIndex;
-            Settings.Default.Save();
-            this.BtnCopyCustomEncoding.Content = SelectedEncoding.WebName.ToUpper();
-            TextChanged(this.TextCustomEncoding, null);
-        }
-
-        private void BtnClear_Click(object sender, RoutedEventArgs e)
+        private void BtnClearClick(object sender, RoutedEventArgs e)
         {
             this.TextASCII.Clear();
             this.TextToCopy.Clear();
         }
 
-        private void TextHex_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        private void TextHexPreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             e.Handled = !Regex.IsMatch(e.Text, "^[0-9A-Fa-f]$");
         }
@@ -248,11 +174,60 @@ namespace StringConv
             return bytes;
         }
 
-        private void About_Click(object sender, RoutedEventArgs e)
+        private void AboutClick(object sender, RoutedEventArgs e)
         {
             AboutBox aboutBox = new AboutBox();
             aboutBox.Owner = this;
             aboutBox.ShowDialog();
+        }
+
+        private void AddCustomEncodings()
+        {
+            if (CustomEncodings.Items == null || CustomEncodings.Items.Count == 0)
+            {
+                return;
+            }
+            foreach (Encoding encoding in CustomEncodings.Items)
+            {
+                if (encoding == null)
+                {
+                    continue;
+                }
+                GridString.RowDefinitions.Add(new RowDefinition() { Height = GridLength.Auto });
+                TextBlock textBlock = new TextBlock
+                {
+                    Text = encoding.EncodingName,
+                    Margin = new Thickness(10),
+                    HorizontalAlignment = HorizontalAlignment.Left,
+                    Foreground = Brushes.LightGray,
+                };
+                TextBox textBox = new TextBox
+                {
+                    Tag = encoding.CodePage,
+                    Margin = new Thickness(10),
+                    HorizontalAlignment = HorizontalAlignment.Stretch,
+                    Background = (Brush)new BrushConverter().ConvertFrom("#ff313131"),
+                    Foreground = Brushes.LightGray,
+                };
+                textBox.TextChanged += TextChanged;
+
+                Grid.SetRow(textBlock, GridString.RowDefinitions.Count - 1);
+                Grid.SetColumn(textBlock, 0);
+                Grid.SetRow(textBox, GridString.RowDefinitions.Count - 1);
+                Grid.SetColumn(textBox, 1);
+                GridString.Children.Add(textBlock);
+                GridString.Children.Add(textBox);
+
+                Button button = new Button
+                {
+                    Tag = encoding.CodePage,
+                    Content = encoding.EncodingName,
+                    Margin = new Thickness(5, 10, 5, 10),
+                };
+                button.Click += BtnCopyClick;
+                button.MouseEnter += BtnMouseEnter;
+                WrapCopy.Children.Insert(WrapCopy.Children.Count - 4, button);
+            }
         }
     }
 }
