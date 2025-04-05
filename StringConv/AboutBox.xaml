@@ -11,6 +11,7 @@
         Foreground="LightGray"
         Loaded="Window_Loaded"
         ResizeMode="NoResize"
+        ShowInTaskbar="False"
         WindowStartupLocation="CenterOwner"
         mc:Ignorable="d">
     <StackPanel Margin="20">
