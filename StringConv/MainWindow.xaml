@@ -18,7 +18,7 @@
             <MenuItem Click="AboutClick" Header="About" />
         </Menu>
         <Grid Name="GridString"
-              Margin="20,20,20,10"
+              Margin="20,20,20,0"
               HorizontalAlignment="Stretch"
               VerticalAlignment="Top"
               DockPanel.Dock="Top">
@@ -59,9 +59,8 @@
                      Tag="1200"
                      TextChanged="TextChanged" />
         </Grid>
-        <Separator DockPanel.Dock="Top" />
         <Grid Name="GridHex"
-              Margin="20,10,20,20"
+              Margin="20,0,20,20"
               HorizontalAlignment="Stretch"
               VerticalAlignment="Stretch"
               DockPanel.Dock="Bottom">
