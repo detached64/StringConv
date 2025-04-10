@@ -107,7 +107,6 @@
                      Background="#FF313131"
                      Foreground="LightGray"
                      InputMethod.IsInputMethodEnabled="False"
-                     PreviewTextInput="TextHexPreviewTextInput"
                      TextChanged="TextChanged" />
             <TextBox x:Name="TextFormattedHex"
                      Grid.Row="1"

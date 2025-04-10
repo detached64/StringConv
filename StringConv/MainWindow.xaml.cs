@@ -18,6 +18,7 @@ namespace StringConv
         {
             InitializeComponent();
             AddCustomEncodings();
+            DataObject.AddPastingHandler(this.TextHex, OnPaste);
         }
 
         private void TextChanged(object sender, TextChangedEventArgs e)
@@ -227,6 +228,20 @@ namespace StringConv
                 button.Click += BtnCopyClick;
                 button.MouseEnter += BtnMouseEnter;
                 WrapCopy.Children.Insert(WrapCopy.Children.Count - 4, button);
+            }
+        }
+
+        private void OnPaste(object sender, DataObjectPastingEventArgs e)
+        {
+            if (e.DataObject.GetDataPresent(typeof(string)))
+            {
+                string text = (string)e.DataObject.GetData(typeof(string));
+                string filteredText = text.Replace("\r", "").Replace("\n", " ");
+                if (text != filteredText)
+                {
+                    e.CancelCommand();
+                    this.TextHex.Text = filteredText;
+                }
             }
         }
     }
