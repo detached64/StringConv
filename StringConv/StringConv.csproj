@@ -66,9 +66,23 @@
     <Compile Include="AboutBox.xaml.cs">
       <DependentUpon>AboutBox.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CustomEncodings.cs" />
+    <Compile Include="AddEncodingDialog.xaml.cs">
+      <DependentUpon>AddEncodingDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EncodingsViewModel.cs" />
+    <Compile Include="EncodingSettings.xaml.cs">
+      <DependentUpon>EncodingSettings.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Settings.cs" />
     <Page Include="AboutBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddEncodingDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EncodingSettings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

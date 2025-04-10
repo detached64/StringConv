@@ -1,0 +1,97 @@
+<Window x:Class="StringConv.AddEncodingBox"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:StringConv"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        Title="AddEncodingBox"
+        Width="450"
+        Height="450"
+        Background="#FF2E323A"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterOwner"
+        mc:Ignorable="d">
+    <Grid Margin="20">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0"
+                   Margin="0,10,10,10"
+                   HorizontalAlignment="Left"
+                   Foreground="LightGray"
+                   Text="Encodings" />
+        <DataGrid Name="DataEncoding"
+                  Grid.Row="1"
+                  AutoGenerateColumns="False"
+                  Background="#FF313131"
+                  BorderBrush="Gray"
+                  CanUserAddRows="False"
+                  CanUserDeleteRows="False"
+                  CanUserReorderColumns="False"
+                  Foreground="LightGray"
+                  RowHeaderWidth="0"
+                  SelectionMode="Extended"
+                  SelectionUnit="FullRow">
+            <DataGrid.ColumnHeaderStyle>
+                <Style TargetType="DataGridColumnHeader">
+                    <Setter Property="Background" Value="#FF161616" />
+                    <Setter Property="Foreground" Value="LightGray" />
+                    <Setter Property="BorderBrush" Value="Gray" />
+                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                </Style>
+            </DataGrid.ColumnHeaderStyle>
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <Style.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="FontWeight" Value="SemiBold" />
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsSelected" Value="True" />
+                                <Condition Property="IsKeyboardFocusWithin" Value="False" />
+                            </MultiTrigger.Conditions>
+                        </MultiTrigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.RowStyle>
+            <DataGrid.CellStyle>
+                <Style TargetType="DataGridCell">
+                    <Setter Property="Background" Value="#FF313131" />
+                    <Setter Property="Foreground" Value="LightGray" />
+                    <Setter Property="BorderBrush" Value="Gray" />
+                    <Setter Property="BorderThickness" Value="0,0,0,1" />
+                </Style>
+            </DataGrid.CellStyle>
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="*"
+                                    Binding="{Binding EncodingName}"
+                                    Header="Name"
+                                    IsReadOnly="True" />
+                <DataGridTextColumn Width="*"
+                                    Binding="{Binding CodePage}"
+                                    Header="Code Page"
+                                    IsReadOnly="True" />
+                <DataGridTextColumn Width="*"
+                                    Binding="{Binding WebName}"
+                                    Header="WebName"
+                                    IsReadOnly="True" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <StackPanel Grid.Row="2" Orientation="Horizontal">
+            <Button Name="BtnAdd"
+                    Width="80"
+                    Margin="0,10,10,10"
+                    Background="#FF313131"
+                    Click="BtnAdd_Click"
+                    Content="Add"
+                    Foreground="LightGray">
+            </Button>
+        </StackPanel>
+    </Grid>
+</Window>

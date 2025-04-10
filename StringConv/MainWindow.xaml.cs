@@ -17,8 +17,9 @@ namespace StringConv
         public MainWindow()
         {
             InitializeComponent();
-            AddCustomEncodings();
+            ReloadCustomEncodings();
             DataObject.AddPastingHandler(this.TextHex, OnPaste);
+            UpdateByteCount();
         }
 
         private void TextChanged(object sender, TextChangedEventArgs e)
@@ -34,6 +35,7 @@ namespace StringConv
             UpdateStrings(textBox);
             UpdateHex(textBox);
             UpdateFormattedHex(textBox);
+            UpdateBase64(textBox);
             UpdateByteCount();
             IsUpdating = false;
         }
@@ -44,19 +46,27 @@ namespace StringConv
             {
                 return null;
             }
-            if (sender.Name == "TextHex")
+            switch (sender.Name)
             {
-                return HexStringToByteArray(new string(input.Where(c => Uri.IsHexDigit(c)).ToArray()).ToUpper());
-            }
-            else
-            {
-                return Encoding.GetEncoding(int.Parse(sender.Tag.ToString())).GetBytes(input);
+                case "TextHex":
+                    return HexStringToByteArray(new string(input.Where(c => Uri.IsHexDigit(c)).ToArray()).ToUpper());
+                case "TextBase64":
+                    try
+                    {
+                        return Convert.FromBase64String(input);
+                    }
+                    catch (FormatException)
+                    {
+                        return null;
+                    }
+                default:
+                    return Encoding.GetEncoding(int.Parse(sender.Tag.ToString())).GetBytes(input);
             }
         }
 
         private void UpdateByteCount()
         {
-            this.TextByteCount.Text = Input == null ? (this.TextHex.Text.Length == 0 ? "0" : "Parse error") : Input.Length.ToString();
+            this.TextByteCount.Text = Input == null ? (this.TextHex.Text.Length == 0 && this.TextBase64.Text.Length == 0 ? "0" : "Parse error") : Input.Length.ToString();
         }
 
         private void UpdateStrings(TextBox sender)
@@ -107,6 +117,22 @@ namespace StringConv
             else
             {
                 this.TextFormattedHex.Text = BitConverter.ToString(Input).Replace("-", " ");
+            }
+        }
+
+        private void UpdateBase64(TextBox sender)
+        {
+            if (sender == this.TextBase64)
+            {
+                return;
+            }
+            if (Input == null || Input.Length == 0)
+            {
+                this.TextBase64.Text = string.Empty;
+            }
+            else
+            {
+                this.TextBase64.Text = Convert.ToBase64String(Input);
             }
         }
 
@@ -182,13 +208,34 @@ namespace StringConv
             aboutBox.ShowDialog();
         }
 
-        private void AddCustomEncodings()
+        private void ReloadCustomEncodings()
         {
-            if (CustomEncodings.Items == null || CustomEncodings.Items.Count == 0)
+            if (EncodingsViewModel.Instance.Encodings == null)
             {
                 return;
             }
-            foreach (Encoding encoding in CustomEncodings.Items)
+            // Remove existing encodings
+            for (int i = this.GridString.RowDefinitions.Count - 1; i > 1; i--)
+            {
+                if (this.GridString.Children.Count > 0)
+                {
+                    foreach (UIElement child in this.GridString.Children.OfType<UIElement>().Where(x => Grid.GetRow(x) == i).ToList())
+                    {
+                        this.GridString.Children.Remove(child);
+                    }
+                }
+                this.GridString.RowDefinitions.RemoveAt(i);
+            }
+            int button_index = this.WrapCopy.Children.Count - 5;
+            for (int i = button_index; i > 1; i--)
+            {
+                if (this.WrapCopy.Children[i] is Button)
+                {
+                    this.WrapCopy.Children.RemoveAt(i);
+                }
+            }
+            // Add new encodings
+            foreach (Encoding encoding in EncodingsViewModel.Instance.Encodings)
             {
                 if (encoding == null)
                 {
@@ -207,6 +254,7 @@ namespace StringConv
                     Tag = encoding.CodePage,
                     Margin = new Thickness(10),
                     HorizontalAlignment = HorizontalAlignment.Stretch,
+                    AcceptsReturn = true,
                     Background = (Brush)new BrushConverter().ConvertFrom("#ff313131"),
                     Foreground = Brushes.LightGray,
                 };
@@ -236,13 +284,21 @@ namespace StringConv
             if (e.DataObject.GetDataPresent(typeof(string)))
             {
                 string text = (string)e.DataObject.GetData(typeof(string));
-                string filteredText = text.Replace("\r", "").Replace("\n", " ");
+                string filteredText = text.Replace("\r", string.Empty).Replace("\n", " ");
                 if (text != filteredText)
                 {
                     e.CancelCommand();
                     this.TextHex.Text = filteredText;
                 }
             }
+        }
+
+        private void EncodingOptionsClick(object sender, RoutedEventArgs e)
+        {
+            EncodingOptions encodingOptions = new EncodingOptions();
+            encodingOptions.Owner = this;
+            encodingOptions.ShowDialog();
+            ReloadCustomEncodings();
         }
     }
 }
