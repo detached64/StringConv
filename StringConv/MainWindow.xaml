@@ -11,189 +11,191 @@
         FontSize="14"
         WindowStartupLocation="CenterScreen"
         mc:Ignorable="d">
-    <DockPanel>
+    <DockPanel LastChildFill="True">
         <Menu Background="#FF282C34"
               DockPanel.Dock="Top"
               Foreground="LightGray">
-            <MenuItem Click="EncodingOptionsClick" Header="Encoding" />
+            <MenuItem Click="EncodingOptionsClick" Header="Encodings" />
             <MenuItem Click="AboutClick" Header="About" />
         </Menu>
-        <Grid Name="GridString"
-              Margin="20,20,20,0"
-              HorizontalAlignment="Stretch"
-              VerticalAlignment="Top"
-              DockPanel.Dock="Top">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="5*" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            <TextBlock Grid.Row="0"
-                       Margin="10,10,10,10"
-                       HorizontalAlignment="Left"
-                       Foreground="LightGray"
-                       Text="ASCII" />
-            <TextBox x:Name="TextASCII"
-                     Grid.Row="0"
-                     Grid.Column="1"
-                     Margin="10,10,10,10"
-                     HorizontalAlignment="Stretch"
-                     AcceptsReturn="True"
-                     Background="#FF313131"
-                     Foreground="LightGray"
-                     Tag="20127"
-                     TextChanged="TextChanged" />
-            <TextBlock Grid.Row="1"
-                       Margin="10,10,10,10"
-                       HorizontalAlignment="Left"
-                       Foreground="LightGray"
-                       Text="Unicode" />
-            <TextBox x:Name="TextUnicode"
-                     Grid.Row="1"
-                     Grid.Column="1"
-                     Margin="10,10,10,10"
-                     HorizontalAlignment="Stretch"
-                     AcceptsReturn="True"
-                     Background="#FF313131"
-                     Foreground="LightGray"
-                     Tag="1200"
-                     TextChanged="TextChanged" />
-        </Grid>
-        <Grid Name="GridHex"
-              Margin="20,0,20,20"
-              HorizontalAlignment="Stretch"
-              VerticalAlignment="Stretch"
-              DockPanel.Dock="Bottom">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="5*" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            <TextBlock Grid.Row="0"
-                       Margin="10,10,10,10"
-                       HorizontalAlignment="Left"
-                       Foreground="LightGray"
-                       Text="Hex" />
-            <TextBlock Grid.Row="1"
-                       Margin="10,10,10,10"
-                       HorizontalAlignment="Left"
-                       Foreground="LightGray"
-                       Text="Formatted Hex" />
-            <TextBlock Grid.Row="2"
-                       Margin="10,10,10,10"
-                       HorizontalAlignment="Left"
-                       Foreground="LightGray"
-                       Text="Base64" />
-            <TextBlock Grid.Row="3"
-                       Margin="10,10,10,10"
-                       HorizontalAlignment="Left"
-                       Foreground="LightGray"
-                       Text="Copy" />
-            <TextBlock Grid.Row="4"
-                       Margin="10,10,10,10"
-                       HorizontalAlignment="Left"
-                       Foreground="LightGray"
-                       Text="String to Copy" />
-            <TextBlock Grid.Row="5"
-                       Margin="10,10,10,10"
-                       HorizontalAlignment="Left"
-                       Foreground="LightGray"
-                       Text="Byte Count" />
-            <TextBox x:Name="TextHex"
-                     Grid.Row="0"
-                     Grid.Column="1"
-                     Margin="10,10,10,10"
-                     Background="#FF313131"
-                     Foreground="LightGray"
-                     InputMethod.IsInputMethodEnabled="False"
-                     TextChanged="TextChanged" />
-            <TextBox x:Name="TextFormattedHex"
-                     Grid.Row="1"
-                     Grid.Column="1"
-                     Margin="10,10,10,10"
-                     Background="#FF313131"
-                     Foreground="LightGray"
-                     IsReadOnly="True" />
-            <TextBox x:Name="TextBase64"
-                     Grid.Row="2"
-                     Grid.Column="1"
-                     Margin="10,10,10,10"
-                     Background="#FF313131"
-                     Foreground="LightGray"
-                     TextChanged="TextChanged" />
-            <WrapPanel Name="WrapCopy"
-                       Grid.Row="3"
-                       Grid.Column="1"
-                       Margin="0"
-                       Orientation="Horizontal">
-                <Button Name="BtnCopyASCII"
-                        Margin="10,10,5,10"
-                        Click="BtnCopyClick"
-                        Content="ASCII"
-                        MouseEnter="BtnMouseEnter"
-                        Tag="20127" />
-                <Button Name="BtnCopyUnicode"
-                        Margin="5,10,5,10"
-                        Click="BtnCopyClick"
-                        Content="Unicode"
-                        MouseEnter="BtnMouseEnter"
-                        Tag="1200" />
-                <Button Name="BtnCopyHex"
-                        Margin="5,10,5,10"
-                        Click="BtnCopyClick"
-                        Content="Hex"
-                        MouseEnter="BtnMouseEnter" />
-                <Button Name="BtnCopyHexWithSpace"
-                        Margin="5,10,5,10"
-                        Click="BtnCopyClick"
-                        Content="Hex with Space"
-                        MouseEnter="BtnMouseEnter" />
-                <Button Name="BtnCopyHexWithHyphen"
-                        Margin="5,10,5,10"
-                        Click="BtnCopyClick"
-                        Content="Hex with Hyphen"
-                        MouseEnter="BtnMouseEnter" />
-                <Button Name="BtnCopyBase64"
-                        Margin="5,10,10,10"
-                        Click="BtnCopyClick"
-                        Content="Base64"
-                        MouseEnter="BtnMouseEnter" />
-            </WrapPanel>
-            <TextBox Name="TextToCopy"
-                     Grid.Row="4"
-                     Grid.Column="1"
-                     Margin="10,10,10,10"
-                     HorizontalAlignment="Stretch"
-                     VerticalAlignment="Stretch"
-                     Background="#FF313131"
-                     Foreground="LightGray"
-                     IsReadOnly="True"
-                     TextWrapping="Wrap" />
-            <Grid Grid.Row="5" Grid.Column="1">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-                <TextBlock Name="TextByteCount"
-                           Margin="10,10,10,10"
-                           HorizontalAlignment="Left"
-                           Foreground="LightGray" />
-                <Button Name="BtnClear"
-                        Grid.Column="1"
-                        Margin="10,10,10,10"
-                        Click="BtnClearClick"
-                        Content="Clear" />
-            </Grid>
-        </Grid>
+        <ScrollViewer DockPanel.Dock="Top" VerticalScrollBarVisibility="Hidden">
+            <DockPanel>
+                <Grid Name="GridString"
+                      Margin="20,20,20,0"
+                      DockPanel.Dock="Top">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="5*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0"
+                               Margin="10,10,10,10"
+                               HorizontalAlignment="Left"
+                               Foreground="LightGray"
+                               Text="ASCII" />
+                    <TextBox x:Name="TextASCII"
+                             Grid.Row="0"
+                             Grid.Column="1"
+                             Margin="10,10,10,10"
+                             HorizontalAlignment="Stretch"
+                             AcceptsReturn="True"
+                             Background="#FF313131"
+                             Foreground="LightGray"
+                             Tag="20127"
+                             TextChanged="TextChanged" />
+                    <TextBlock Grid.Row="1"
+                               Margin="10,10,10,10"
+                               HorizontalAlignment="Left"
+                               Foreground="LightGray"
+                               Text="Unicode" />
+                    <TextBox x:Name="TextUnicode"
+                             Grid.Row="1"
+                             Grid.Column="1"
+                             Margin="10,10,10,10"
+                             HorizontalAlignment="Stretch"
+                             AcceptsReturn="True"
+                             Background="#FF313131"
+                             Foreground="LightGray"
+                             Tag="1200"
+                             TextChanged="TextChanged" />
+                </Grid>
+                <Grid Name="GridHex"
+                      Margin="20,0,20,20"
+                      HorizontalAlignment="Stretch"
+                      VerticalAlignment="Stretch"
+                      DockPanel.Dock="Bottom">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="5*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0"
+                               Margin="10,10,10,10"
+                               HorizontalAlignment="Left"
+                               Foreground="LightGray"
+                               Text="Hex" />
+                    <TextBlock Grid.Row="1"
+                               Margin="10,10,10,10"
+                               HorizontalAlignment="Left"
+                               Foreground="LightGray"
+                               Text="Formatted Hex" />
+                    <TextBlock Grid.Row="2"
+                               Margin="10,10,10,10"
+                               HorizontalAlignment="Left"
+                               Foreground="LightGray"
+                               Text="Base64" />
+                    <TextBlock Grid.Row="3"
+                               Margin="10,10,10,10"
+                               HorizontalAlignment="Left"
+                               Foreground="LightGray"
+                               Text="Copy" />
+                    <TextBlock Grid.Row="4"
+                               Margin="10,10,10,10"
+                               HorizontalAlignment="Left"
+                               Foreground="LightGray"
+                               Text="String to Copy" />
+                    <TextBlock Grid.Row="5"
+                               Margin="10,10,10,10"
+                               HorizontalAlignment="Left"
+                               Foreground="LightGray"
+                               Text="Byte Count" />
+                    <TextBox x:Name="TextHex"
+                             Grid.Row="0"
+                             Grid.Column="1"
+                             Margin="10,10,10,10"
+                             Background="#FF313131"
+                             Foreground="LightGray"
+                             InputMethod.IsInputMethodEnabled="False"
+                             TextChanged="TextChanged" />
+                    <TextBox x:Name="TextFormattedHex"
+                             Grid.Row="1"
+                             Grid.Column="1"
+                             Margin="10,10,10,10"
+                             Background="#FF313131"
+                             Foreground="LightGray"
+                             IsReadOnly="True" />
+                    <TextBox x:Name="TextBase64"
+                             Grid.Row="2"
+                             Grid.Column="1"
+                             Margin="10,10,10,10"
+                             Background="#FF313131"
+                             Foreground="LightGray"
+                             TextChanged="TextChanged" />
+                    <WrapPanel Name="WrapCopy"
+                               Grid.Row="3"
+                               Grid.Column="1"
+                               Margin="0"
+                               Orientation="Horizontal">
+                        <Button Name="BtnCopyASCII"
+                                Margin="10,10,5,10"
+                                Click="BtnCopyClick"
+                                Content="ASCII"
+                                MouseEnter="BtnMouseEnter"
+                                Tag="20127" />
+                        <Button Name="BtnCopyUnicode"
+                                Margin="5,10,5,10"
+                                Click="BtnCopyClick"
+                                Content="Unicode"
+                                MouseEnter="BtnMouseEnter"
+                                Tag="1200" />
+                        <Button Name="BtnCopyHex"
+                                Margin="5,10,5,10"
+                                Click="BtnCopyClick"
+                                Content="Hex"
+                                MouseEnter="BtnMouseEnter" />
+                        <Button Name="BtnCopyHexWithSpace"
+                                Margin="5,10,5,10"
+                                Click="BtnCopyClick"
+                                Content="Hex with Space"
+                                MouseEnter="BtnMouseEnter" />
+                        <Button Name="BtnCopyHexWithHyphen"
+                                Margin="5,10,5,10"
+                                Click="BtnCopyClick"
+                                Content="Hex with Hyphen"
+                                MouseEnter="BtnMouseEnter" />
+                        <Button Name="BtnCopyBase64"
+                                Margin="5,10,10,10"
+                                Click="BtnCopyClick"
+                                Content="Base64"
+                                MouseEnter="BtnMouseEnter" />
+                    </WrapPanel>
+                    <TextBox Name="TextToCopy"
+                             Grid.Row="4"
+                             Grid.Column="1"
+                             Margin="10,10,10,10"
+                             HorizontalAlignment="Stretch"
+                             VerticalAlignment="Stretch"
+                             Background="#FF313131"
+                             Foreground="LightGray"
+                             IsReadOnly="True"
+                             TextWrapping="Wrap" />
+                    <Grid Grid.Row="5" Grid.Column="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Name="TextByteCount"
+                                   Margin="10,10,10,10"
+                                   HorizontalAlignment="Left"
+                                   Foreground="LightGray" />
+                        <Button Name="BtnClear"
+                                Grid.Column="1"
+                                Margin="10,10,10,10"
+                                Click="BtnClearClick"
+                                Content="Clear" />
+                    </Grid>
+                </Grid>
+            </DockPanel>
+        </ScrollViewer>
     </DockPanel>
 </Window>
