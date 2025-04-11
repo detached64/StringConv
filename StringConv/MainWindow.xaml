@@ -177,7 +177,8 @@
                      VerticalAlignment="Stretch"
                      Background="#FF313131"
                      Foreground="LightGray"
-                     IsReadOnly="True" />
+                     IsReadOnly="True"
+                     TextWrapping="Wrap" />
             <Grid Grid.Row="5" Grid.Column="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
