@@ -299,6 +299,7 @@ namespace StringConv
             encodingOptions.Owner = this;
             encodingOptions.ShowDialog();
             ReloadCustomEncodings();
+            TextChanged(this.TextBase64, null);
         }
     }
 }
