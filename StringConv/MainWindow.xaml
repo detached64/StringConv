@@ -9,6 +9,7 @@
         Height="700"
         Background="#FF2E323A"
         FontSize="14"
+        SizeToContent="Height"
         WindowStartupLocation="CenterScreen"
         mc:Ignorable="d">
     <DockPanel LastChildFill="True">
@@ -45,7 +46,8 @@
                              Background="#FF313131"
                              Foreground="LightGray"
                              Tag="20127"
-                             TextChanged="TextChanged" />
+                             TextChanged="TextChanged"
+                             TextWrapping="Wrap" />
                     <TextBlock Grid.Row="1"
                                Margin="10,10,10,10"
                                HorizontalAlignment="Left"
@@ -60,7 +62,8 @@
                              Background="#FF313131"
                              Foreground="LightGray"
                              Tag="1200"
-                             TextChanged="TextChanged" />
+                             TextChanged="TextChanged"
+                             TextWrapping="Wrap" />
                 </Grid>
                 <Grid Name="GridHex"
                       Margin="20,0,20,20"
@@ -116,21 +119,24 @@
                              Background="#FF313131"
                              Foreground="LightGray"
                              InputMethod.IsInputMethodEnabled="False"
-                             TextChanged="TextChanged" />
+                             TextChanged="TextChanged"
+                             TextWrapping="Wrap" />
                     <TextBox x:Name="TextFormattedHex"
                              Grid.Row="1"
                              Grid.Column="1"
                              Margin="10,10,10,10"
                              Background="#FF313131"
                              Foreground="LightGray"
-                             IsReadOnly="True" />
+                             IsReadOnly="True"
+                             TextWrapping="Wrap" />
                     <TextBox x:Name="TextBase64"
                              Grid.Row="2"
                              Grid.Column="1"
                              Margin="10,10,10,10"
                              Background="#FF313131"
                              Foreground="LightGray"
-                             TextChanged="TextChanged" />
+                             TextChanged="TextChanged"
+                             TextWrapping="Wrap" />
                     <WrapPanel Name="WrapCopy"
                                Grid.Row="3"
                                Grid.Column="1"

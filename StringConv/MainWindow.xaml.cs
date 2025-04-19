@@ -257,6 +257,7 @@ namespace StringConv
                     AcceptsReturn = true,
                     Background = (Brush)new BrushConverter().ConvertFrom("#ff313131"),
                     Foreground = Brushes.LightGray,
+                    TextWrapping = TextWrapping.Wrap,
                 };
                 textBox.TextChanged += TextChanged;
 
