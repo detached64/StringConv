@@ -1,0 +1,45 @@
+<Window x:Class="StringConv.Views.AboutView"
+        xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:i="using:StringConv.I18n"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="using:StringConv.ViewModels"
+        Title="{x:Static i:GuiStrings.About}"
+        d:DesignHeight="450"
+        d:DesignWidth="800"
+        x:DataType="vm:AboutViewModel"
+        CanMaximize="False"
+        CanMinimize="False"
+        Icon="/Assets/logo.ico"
+        ShowInTaskbar="False"
+        SizeToContent="WidthAndHeight"
+        WindowStartupLocation="CenterOwner"
+        mc:Ignorable="d">
+
+    <Design.DataContext>
+        <vm:AboutViewModel />
+    </Design.DataContext>
+
+    <StackPanel Margin="20" Spacing="15">
+        <TextBlock>
+            <TextBlock.Text>
+                <MultiBinding StringFormat="{}{0} v{1}">
+                    <Binding Path="AssemblyName" />
+                    <Binding Path="AssemblyVersion" />
+                </MultiBinding>
+            </TextBlock.Text>
+        </TextBlock>
+        <TextBlock Text="{Binding Copyright}" />
+        <HyperlinkButton Padding="0"
+                         Command="{Binding OpenUrlCommand}"
+                         CommandParameter="{Binding SourceUrl}"
+                         Content="{x:Static i:GuiStrings.SourceURL}">
+            <HyperlinkButton.Styles>
+                <Style Selector="HyperlinkButton">
+                    <Setter Property="TextBlock.TextDecorations" Value="" />
+                </Style>
+            </HyperlinkButton.Styles>
+        </HyperlinkButton>
+    </StackPanel>
+</Window>
