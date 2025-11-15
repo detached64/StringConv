@@ -46,9 +46,7 @@
                                             <MenuItem Command="{Binding $parent[Window].((vm:MainViewModel)DataContext).DeleteCommand}"
                                                       CommandParameter="{Binding}"
                                                       Header="{x:Static i:GuiStrings.Delete}" />
-                                            <MenuItem Command="{Binding $parent[Window].((vm:MainViewModel)DataContext).ClearCommand}"
-                                                      Header="{x:Static i:GuiStrings.Clear}"
-                                                      HotKey="Ctrl+Shift+C" />
+                                            <MenuItem Command="{Binding $parent[Window].((vm:MainViewModel)DataContext).ClearCommand}" Header="{x:Static i:GuiStrings.Clear}" />
                                         </ContextMenu>
                                     </StackPanel.ContextMenu>
                                 </StackPanel>
@@ -72,8 +70,7 @@
                         Command="{Binding CopyCommand}"
                         CommandParameter="{Binding $parent[Window]}"
                         Content="{x:Static i:GuiStrings.Copy}"
-                        DockPanel.Dock="Bottom"
-                        HotKey="Ctrl+C" />
+                        DockPanel.Dock="Bottom" />
                 <TextBlock Margin="0,0,0,10"
                            DockPanel.Dock="Top"
                            Text="{x:Static i:GuiStrings.CopyData}" />
