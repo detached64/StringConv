@@ -117,7 +117,7 @@ internal partial class MainViewModel : ViewModelBase
 
     private void UpdateHexText()
     {
-        if (InputData?.Length == 0)
+        if (InputData == null || InputData.Length == 0)
         {
             HexText = string.Empty;
             return;
@@ -142,7 +142,7 @@ internal partial class MainViewModel : ViewModelBase
 
     private void UpdateCopyText()
     {
-        if (SelectedConverter == null || InputData?.Length == 0)
+        if (SelectedConverter == null || InputData == null || InputData.Length == 0)
         {
             CopyText = string.Empty;
             return;
