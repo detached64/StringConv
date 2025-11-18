@@ -83,14 +83,14 @@
                                 <TextBlock Text="{Binding Name}" />
                             </TreeDataTemplate>
                             <DataTemplate DataType="strconv:StringConverter">
-                                <Border Background="Transparent">
-                                    <Border.ContextMenu>
+                                <Panel>
+                                    <Panel.ContextMenu>
                                         <ContextMenu>
                                             <MenuItem Command="{Binding $parent[Window].((vm:MainViewModel)DataContext).AddCommand}" Header="{x:Static i:GuiStrings.Fix}" />
                                         </ContextMenu>
-                                    </Border.ContextMenu>
+                                    </Panel.ContextMenu>
                                     <TextBlock Text="{Binding Name}" />
-                                </Border>
+                                </Panel>
                             </DataTemplate>
                         </TreeView.DataTemplates>
                     </TreeView>
