@@ -142,7 +142,7 @@ internal partial class MainViewModel : ViewModelBase
 
     private void UpdateCopyText()
     {
-        if (SelectedConverter == null || InputData == null || InputData.Length == 0)
+        if (SelectedConverter is null || InputData == null || InputData.Length == 0)
         {
             CopyText = string.Empty;
             return;

@@ -1,9 +1,9 @@
+using System;
 using Avalonia.Media;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Messaging;
 using StringConv.Models.Converters;
 using StringConv.Models.Messages;
-using System;
 
 namespace StringConv.ViewModels;
 
@@ -29,12 +29,12 @@ internal partial class ConverterViewModel(StringConverter converter) : ViewModel
             {
                 byte[] data = converter.FromString(text);
                 TextChanged?.Invoke(this, data);
-                WeakReferenceMessenger.Default.Send(new StatusMessage($"Conversion successful."));
+                WeakReferenceMessenger.Default.Send(new StatusMessage("Conversion successful."));
             }
             else
             {
-                TextChanged?.Invoke(this, Array.Empty<byte>());
-                WeakReferenceMessenger.Default.Send(new StatusMessage($"Input is empty.", Brushes.Orange));
+                TextChanged?.Invoke(this, []);
+                WeakReferenceMessenger.Default.Send(new StatusMessage("Input is empty.", Brushes.Orange));
             }
         }
         catch (Exception ex)
