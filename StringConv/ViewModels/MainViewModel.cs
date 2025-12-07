@@ -169,6 +169,7 @@ internal partial class MainViewModel : ViewModelBase
             cvm.TextChanged += OnConverterTextChanged;
             ConverterViewModels.Add(cvm);
             WeakReferenceMessenger.Default.Send(new StatusMessage($"Added converter: {SelectedConverter.Name}"));
+            cvm.UpdateToString(InputData);
         }
     }
 
