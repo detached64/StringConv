@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="StringConv.Generator/StringConv.Generator.csproj" />
+  <Project Path="StringConv/StringConv.csproj" />
+</Solution>
