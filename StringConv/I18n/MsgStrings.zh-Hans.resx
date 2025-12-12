@@ -123,11 +123,14 @@
   <data name="ConverterCleared" xml:space="preserve">
     <value>已清空所有转换器。</value>
   </data>
-  <data name="ConverterFixed" xml:space="preserve">
+  <data name="ConverterPinned" xml:space="preserve">
     <value>已固定转换器：{0}</value>
   </data>
   <data name="ConverterRemoved" xml:space="preserve">
     <value>已删除转换器：{0}</value>
+  </data>
+  <data name="ConvertersPinned" xml:space="preserve">
+    <value>已固定{0}个转换器：{1}</value>
   </data>
   <data name="CopyError" xml:space="preserve">
     <value>复制错误：{0}</value>

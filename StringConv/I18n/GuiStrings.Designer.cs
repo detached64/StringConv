@@ -19,7 +19,7 @@ namespace StringConv.I18n {
     // 类通过类似于 ResGen 或 Visual Studio 的工具自动生成的。
     // 若要添加或移除成员，请编辑 .ResX 文件，然后重新运行 ResGen
     // (以 /str 作为命令选项)，或重新生成 VS 项目。
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "18.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class GuiStrings {
@@ -169,24 +169,6 @@ namespace StringConv.I18n {
         }
         
         /// <summary>
-        ///   查找类似 Delete 的本地化字符串。
-        /// </summary>
-        public static string Delete {
-            get {
-                return ResourceManager.GetString("Delete", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Fix 的本地化字符串。
-        /// </summary>
-        public static string Fix {
-            get {
-                return ResourceManager.GetString("Fix", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   查找类似 Hash 的本地化字符串。
         /// </summary>
         public static string Hash {
@@ -232,11 +214,38 @@ namespace StringConv.I18n {
         }
         
         /// <summary>
+        ///   查找类似 Pin 的本地化字符串。
+        /// </summary>
+        public static string Pin {
+            get {
+                return ResourceManager.GetString("Pin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Pin Selected 的本地化字符串。
+        /// </summary>
+        public static string PinSelected {
+            get {
+                return ResourceManager.GetString("PinSelected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Python3 Byte String 的本地化字符串。
         /// </summary>
         public static string Python3ByteString {
             get {
                 return ResourceManager.GetString("Python3ByteString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Remove 的本地化字符串。
+        /// </summary>
+        public static string Remove {
+            get {
+                return ResourceManager.GetString("Remove", resourceCulture);
             }
         }
         

@@ -133,11 +133,11 @@
   <data name="DataEncoding" xml:space="preserve">
     <value>Data Encoding</value>
   </data>
-  <data name="Delete" xml:space="preserve">
-    <value>Delete</value>
+  <data name="Pin" xml:space="preserve">
+    <value>Pin</value>
   </data>
-  <data name="Fix" xml:space="preserve">
-    <value>Fix</value>
+  <data name="PinSelected" xml:space="preserve">
+    <value>Pin Selected</value>
   </data>
   <data name="Hash" xml:space="preserve">
     <value>Hash</value>
@@ -156,6 +156,9 @@
   </data>
   <data name="Python3ByteString" xml:space="preserve">
     <value>Python3 Byte String</value>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>Remove</value>
   </data>
   <data name="SourceURL" xml:space="preserve">
     <value>Source Url</value>

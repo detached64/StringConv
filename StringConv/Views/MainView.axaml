@@ -58,7 +58,7 @@
         <Grid ColumnDefinitions="*,1,*" DockPanel.Dock="Top">
             <ScrollViewer Margin="10,5">
                 <DockPanel>
-                    <ItemsControl DockPanel.Dock="Top" ItemsSource="{Binding ConverterViewModels}">
+                    <ItemsControl DockPanel.Dock="Top" ItemsSource="{Binding PinnedConverterViewModels}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel>
@@ -69,9 +69,9 @@
                                              TextWrapping="WrapWithOverflow" />
                                     <StackPanel.ContextMenu>
                                         <ContextMenu>
-                                            <MenuItem Command="{Binding $parent[Window].((vm:MainViewModel)DataContext).DeleteCommand}"
+                                            <MenuItem Command="{Binding $parent[Window].((vm:MainViewModel)DataContext).RemoveCommand}"
                                                       CommandParameter="{Binding}"
-                                                      Header="{x:Static i:GuiStrings.Delete}" />
+                                                      Header="{x:Static i:GuiStrings.Remove}" />
                                             <MenuItem Command="{Binding $parent[Window].((vm:MainViewModel)DataContext).ClearCommand}" Header="{x:Static i:GuiStrings.Clear}" />
                                         </ContextMenu>
                                     </StackPanel.ContextMenu>
@@ -103,20 +103,22 @@
                 <Grid ColumnDefinitions="Auto,0,*" DockPanel.Dock="Top">
                     <TreeView MinWidth="100"
                               ItemsSource="{Binding ConverterCategories}"
-                              SelectedItem="{Binding SelectedConverter}">
+                              SelectedItem="{Binding SelectedConverter}"
+                              SelectedItems="{Binding SelectedConverters}"
+                              SelectionMode="Multiple">
                         <TreeView.DataTemplates>
                             <TreeDataTemplate DataType="vm:ConverterCategoryViewModel" ItemsSource="{Binding Converters}">
                                 <TextBlock Text="{Binding Name}" />
                             </TreeDataTemplate>
                             <DataTemplate DataType="strconv:StringConverter">
-                                <Panel>
-                                    <Panel.ContextMenu>
+                                <TextBlock Text="{Binding Name}">
+                                    <TextBlock.ContextMenu>
                                         <ContextMenu>
-                                            <MenuItem Command="{Binding $parent[Window].((vm:MainViewModel)DataContext).AddCommand}" Header="{x:Static i:GuiStrings.Fix}" />
+                                            <MenuItem Command="{Binding $parent[Window].((vm:MainViewModel)DataContext).PinCommand}" Header="{x:Static i:GuiStrings.Pin}" />
+                                            <MenuItem Command="{Binding $parent[Window].((vm:MainViewModel)DataContext).PinMultipleCommand}" Header="{x:Static i:GuiStrings.PinSelected}" />
                                         </ContextMenu>
-                                    </Panel.ContextMenu>
-                                    <TextBlock Text="{Binding Name}" />
-                                </Panel>
+                                    </TextBlock.ContextMenu>
+                                </TextBlock>
                             </DataTemplate>
                         </TreeView.DataTemplates>
                     </TreeView>

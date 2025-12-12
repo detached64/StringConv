@@ -19,7 +19,7 @@ namespace StringConv.I18n {
     // 类通过类似于 ResGen 或 Visual Studio 的工具自动生成的。
     // 若要添加或移除成员，请编辑 .ResX 文件，然后重新运行 ResGen
     // (以 /str 作为命令选项)，或重新生成 VS 项目。
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "18.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class MsgStrings {
@@ -79,11 +79,11 @@ namespace StringConv.I18n {
         }
         
         /// <summary>
-        ///   查找类似 Converter fixed: {0} 的本地化字符串。
+        ///   查找类似 Converter pinned: {0} 的本地化字符串。
         /// </summary>
-        public static string ConverterFixed {
+        public static string ConverterPinned {
             get {
-                return ResourceManager.GetString("ConverterFixed", resourceCulture);
+                return ResourceManager.GetString("ConverterPinned", resourceCulture);
             }
         }
         
@@ -93,6 +93,15 @@ namespace StringConv.I18n {
         public static string ConverterRemoved {
             get {
                 return ResourceManager.GetString("ConverterRemoved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 {0} converters pinned: {1} 的本地化字符串。
+        /// </summary>
+        public static string ConvertersPinned {
+            get {
+                return ResourceManager.GetString("ConvertersPinned", resourceCulture);
             }
         }
         

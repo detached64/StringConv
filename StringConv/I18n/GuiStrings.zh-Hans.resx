@@ -133,7 +133,7 @@
     <value>字符编码</value>
   </data>
   <data name="Clear" xml:space="preserve">
-    <value>清除</value>
+    <value>清空</value>
   </data>
   <data name="CodeSnippets" xml:space="preserve">
     <value>代码片段</value>
@@ -153,11 +153,11 @@
   <data name="DataEncoding" xml:space="preserve">
     <value>数据编码</value>
   </data>
-  <data name="Delete" xml:space="preserve">
-    <value>删除</value>
-  </data>
-  <data name="Fix" xml:space="preserve">
+  <data name="Pin" xml:space="preserve">
     <value>固定</value>
+  </data>
+  <data name="PinSelected" xml:space="preserve">
+    <value>固定所选</value>
   </data>
   <data name="Hash" xml:space="preserve">
     <value>哈希</value>
@@ -176,6 +176,9 @@
   </data>
   <data name="Python3ByteString" xml:space="preserve">
     <value>Python3 字节数组</value>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>移除</value>
   </data>
   <data name="SourceURL" xml:space="preserve">
     <value>开源网址</value>
