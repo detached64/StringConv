@@ -127,6 +127,9 @@
   <data name="CString" xml:space="preserve">
     <value>C String</value>
   </data>
+  <data name="Cut" xml:space="preserve">
+    <value>Cut</value>
+  </data>
   <data name="DataEncoding" xml:space="preserve">
     <value>Data Encoding</value>
   </data>
@@ -147,6 +150,9 @@
   </data>
   <data name="PascalByteArray" xml:space="preserve">
     <value>Pascal Byte Array</value>
+  </data>
+  <data name="Paste" xml:space="preserve">
+    <value>Paste</value>
   </data>
   <data name="Python3ByteString" xml:space="preserve">
     <value>Python3 Byte String</value>

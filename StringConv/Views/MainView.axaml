@@ -18,6 +18,20 @@
         <vm:MainViewModel />
     </Design.DataContext>
 
+    <Window.Resources>
+        <MenuFlyout x:Key="TranslatedTextBoxContextFlyout" Placement="Bottom">
+            <MenuItem x:Name="TranslatedTextBoxContextFlyoutCutItem" Header="{x:Static i:GuiStrings.Cut}" Command="{Binding $parent[TextBox].Cut}" IsEnabled="{Binding $parent[TextBox].CanCut}" InputGesture="{x:Static TextBox.CutGesture}" />
+            <MenuItem x:Name="TranslatedTextBoxContextFlyoutCopyItem" Header="{x:Static i:GuiStrings.Copy}" Command="{Binding $parent[TextBox].Copy}" IsEnabled="{Binding $parent[TextBox].CanCopy}" InputGesture="{x:Static TextBox.CopyGesture}"/>
+            <MenuItem x:Name="TranslatedTextBoxContextFlyoutPasteItem" Header="{x:Static i:GuiStrings.Paste}" Command="{Binding $parent[TextBox].Paste}" IsEnabled="{Binding $parent[TextBox].CanPaste}" InputGesture="{x:Static TextBox.PasteGesture}"/>
+        </MenuFlyout>
+    </Window.Resources>
+
+    <Window.Styles>
+        <Style Selector="TextBox">
+            <Setter Property="ContextFlyout" Value="{StaticResource TranslatedTextBoxContextFlyout}" />
+        </Style>
+    </Window.Styles>
+
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Command="{Binding ShowAboutCommand}"
@@ -40,6 +54,7 @@
                                     <TextBox Margin="0,5"
                                              AcceptsReturn="True"
                                              Text="{Binding Text}"
+
                                              TextWrapping="WrapWithOverflow" />
                                     <StackPanel.ContextMenu>
                                         <ContextMenu>
