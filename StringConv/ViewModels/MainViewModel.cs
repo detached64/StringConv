@@ -104,11 +104,11 @@ internal partial class MainViewModel : ViewModelBase
         if (data == null)
             return;
         InputData = data;
-        foreach (ConverterViewModel vm in ConverterViewModels)
+        foreach (ConverterViewModel cvm in ConverterViewModels)
         {
-            if (vm != sender)
+            if (cvm != sender)
             {
-                vm.UpdateToString(data);
+                cvm.UpdateToString(data);
             }
         }
         UpdateHexText();
@@ -154,7 +154,7 @@ internal partial class MainViewModel : ViewModelBase
         catch (Exception ex)
         {
             CopyText = string.Empty;
-            WeakReferenceMessenger.Default.Send(new StatusMessage($"Conversion error: {ex.Message}", Brushes.Red));
+            WeakReferenceMessenger.Default.Send(new StatusMessage(string.Format(MsgStrings.ConversionError, ex.Message), Brushes.Red));
         }
     }
 
@@ -168,7 +168,7 @@ internal partial class MainViewModel : ViewModelBase
             ConverterViewModel cvm = new(SelectedConverter);
             cvm.TextChanged += OnConverterTextChanged;
             ConverterViewModels.Add(cvm);
-            WeakReferenceMessenger.Default.Send(new StatusMessage($"Added converter: {SelectedConverter.Name}"));
+            WeakReferenceMessenger.Default.Send(new StatusMessage(string.Format(MsgStrings.ConverterFixed, SelectedConverter.Name)));
             cvm.UpdateToString(InputData);
         }
     }
@@ -182,7 +182,7 @@ internal partial class MainViewModel : ViewModelBase
             _settingsService.Settings.FixedConverterIndices.Remove(index);
             cvm.TextChanged -= OnConverterTextChanged;
             ConverterViewModels.Remove(cvm);
-            WeakReferenceMessenger.Default.Send(new StatusMessage($"Removed converter: {cvm.Converter.Name}"));
+            WeakReferenceMessenger.Default.Send(new StatusMessage(string.Format(MsgStrings.ConverterRemoved, cvm.Converter.Name)));
         }
     }
 
@@ -191,7 +191,7 @@ internal partial class MainViewModel : ViewModelBase
     {
         ConverterViewModels.Clear();
         _settingsService.Settings.FixedConverterIndices.Clear();
-        WeakReferenceMessenger.Default.Send(new StatusMessage("Cleared all fixed converters."));
+        WeakReferenceMessenger.Default.Send(new StatusMessage(string.Format(MsgStrings.ConverterCleared)));
     }
 
     [RelayCommand]
@@ -204,11 +204,11 @@ internal partial class MainViewModel : ViewModelBase
         try
         {
             await window.Clipboard.SetTextAsync(CopyText);
-            WeakReferenceMessenger.Default.Send(new StatusMessage("Text copied to clipboard."));
+            WeakReferenceMessenger.Default.Send(new StatusMessage(MsgStrings.TextCopied));
         }
         catch (Exception ex)
         {
-            WeakReferenceMessenger.Default.Send(new StatusMessage($"Failed to copy text: {ex.Message}"));
+            WeakReferenceMessenger.Default.Send(new StatusMessage(string.Format(MsgStrings.CopyError, ex.Message), Brushes.Red));
         }
     }
 

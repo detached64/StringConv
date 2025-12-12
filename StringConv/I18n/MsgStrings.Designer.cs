@@ -19,7 +19,7 @@ namespace StringConv.I18n {
     // 类通过类似于 ResGen 或 Visual Studio 的工具自动生成的。
     // 若要添加或移除成员，请编辑 .ResX 文件，然后重新运行 ResGen
     // (以 /str 作为命令选项)，或重新生成 VS 项目。
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "18.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class MsgStrings {
@@ -61,11 +61,65 @@ namespace StringConv.I18n {
         }
         
         /// <summary>
+        ///   查找类似 Conversion error: {0} 的本地化字符串。
+        /// </summary>
+        public static string ConversionError {
+            get {
+                return ResourceManager.GetString("ConversionError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 All converters cleared. 的本地化字符串。
+        /// </summary>
+        public static string ConverterCleared {
+            get {
+                return ResourceManager.GetString("ConverterCleared", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Converter fixed: {0} 的本地化字符串。
+        /// </summary>
+        public static string ConverterFixed {
+            get {
+                return ResourceManager.GetString("ConverterFixed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Converter removed: {0} 的本地化字符串。
+        /// </summary>
+        public static string ConverterRemoved {
+            get {
+                return ResourceManager.GetString("ConverterRemoved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Copy error: {0} 的本地化字符串。
+        /// </summary>
+        public static string CopyError {
+            get {
+                return ResourceManager.GetString("CopyError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Hex string must have even length. 的本地化字符串。
         /// </summary>
         public static string HexStringMustHaveEvenLength {
             get {
                 return ResourceManager.GetString("HexStringMustHaveEvenLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Text copied to clipboard. 的本地化字符串。
+        /// </summary>
+        public static string TextCopied {
+            get {
+                return ResourceManager.GetString("TextCopied", resourceCulture);
             }
         }
     }

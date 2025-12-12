@@ -117,7 +117,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ConversionError" xml:space="preserve">
+    <value>转换错误：{0}</value>
+  </data>
+  <data name="ConverterCleared" xml:space="preserve">
+    <value>已清空所有转换器。</value>
+  </data>
+  <data name="ConverterFixed" xml:space="preserve">
+    <value>已固定转换器：{0}</value>
+  </data>
+  <data name="ConverterRemoved" xml:space="preserve">
+    <value>已删除转换器：{0}</value>
+  </data>
+  <data name="CopyError" xml:space="preserve">
+    <value>复制错误：{0}</value>
+  </data>
   <data name="HexStringMustHaveEvenLength" xml:space="preserve">
     <value>十六进制字符串长度必须为偶数。</value>
+  </data>
+  <data name="TextCopied" xml:space="preserve">
+    <value>内容已复制到剪贴板。</value>
   </data>
 </root>
