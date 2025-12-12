@@ -1,9 +1,9 @@
-using System;
 using Avalonia.Media;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Messaging;
 using StringConv.Models.Converters;
 using StringConv.Models.Messages;
+using System;
 
 namespace StringConv.ViewModels;
 
