@@ -120,6 +120,9 @@
   <data name="ConversionError" xml:space="preserve">
     <value>转换错误：{0}</value>
   </data>
+  <data name="ConversionSuccessful" xml:space="preserve">
+    <value>转换成功。</value>
+  </data>
   <data name="ConverterCleared" xml:space="preserve">
     <value>已清空所有转换器。</value>
   </data>
@@ -137,6 +140,9 @@
   </data>
   <data name="HexStringMustHaveEvenLength" xml:space="preserve">
     <value>十六进制字符串长度必须为偶数。</value>
+  </data>
+  <data name="InputEmpty" xml:space="preserve">
+    <value>输入为空。</value>
   </data>
   <data name="TextCopied" xml:space="preserve">
     <value>内容已复制到剪贴板。</value>

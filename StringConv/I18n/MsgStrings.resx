@@ -100,6 +100,9 @@
   <data name="ConversionError" xml:space="preserve">
     <value>Conversion error: {0}</value>
   </data>
+  <data name="ConversionSuccessful" xml:space="preserve">
+    <value>Conversion successful.</value>
+  </data>
   <data name="ConverterCleared" xml:space="preserve">
     <value>All converters cleared.</value>
   </data>
@@ -117,6 +120,9 @@
   </data>
   <data name="HexStringMustHaveEvenLength" xml:space="preserve">
     <value>Hex string must have even length.</value>
+  </data>
+  <data name="InputEmpty" xml:space="preserve">
+    <value>Input is empty.</value>
   </data>
   <data name="TextCopied" xml:space="preserve">
     <value>Text copied to clipboard.</value>
