@@ -14,13 +14,17 @@ Get ci builds [here](https://github.com/detached64/StringConv/actions/workflows/
 
 ## Usage
 
-- Right-click on the desired converter to fix it to the panel.
+- Right-click on the converter to pin it to the panel.
 
-  ![Fix to Panel](docs/usage-1.png)
+  ![Fix converter to panel](docs/usage-1.png)
 
-- Delete the converter or clear all converters from the panel.
+- Right-click on the selected converters to pin them to the panel.
 
-  ![Delete Converter](docs/usage-2.png)
+  ![Fix converters to panel](docs/usage-2.png)
+  
+- Remove the converter or clear all converters from the panel.
+
+  ![Remove converter](docs/usage-3.png)
 
 ## License
 
