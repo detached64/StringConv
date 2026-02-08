@@ -76,30 +76,26 @@ internal partial class MainViewModel : ViewModelBase
 
     private void ConfigureCategories()
     {
-        ConverterCategoryViewModel charEncodingGroup = new()
+        ConverterCategories.Add(new ConverterCategoryViewModel()
         {
             Name = GuiStrings.CharacterEncoding,
-            Converters = Converters.Where(vm => vm is CharEncodingConverter),
-        };
-        ConverterCategoryViewModel dataEncodingGroup = new()
+            Converters = Converters.Where(vm => vm is CharEncodingConverter).OrderBy(vm => vm.Name),
+        });
+        ConverterCategories.Add(new ConverterCategoryViewModel()
         {
             Name = GuiStrings.DataEncoding,
-            Converters = Converters.Where(vm => vm is DataEncodingConverter),
-        };
-        ConverterCategoryViewModel codeSnippetGroup = new()
+            Converters = Converters.Where(vm => vm is DataEncodingConverter).OrderBy(vm => vm.Name),
+        });
+        ConverterCategories.Add(new ConverterCategoryViewModel()
         {
             Name = GuiStrings.CodeSnippets,
-            Converters = Converters.Where(vm => vm is CodeSnippetConverter),
-        };
-        ConverterCategoryViewModel hashGroup = new()
+            Converters = Converters.Where(vm => vm is CodeSnippetConverter).OrderBy(vm => vm.Name)
+        });
+        ConverterCategories.Add(new ConverterCategoryViewModel()
         {
             Name = GuiStrings.Hash,
-            Converters = Converters.Where(vm => vm is HashConverter),
-        };
-        ConverterCategories.Add(charEncodingGroup);
-        ConverterCategories.Add(dataEncodingGroup);
-        ConverterCategories.Add(codeSnippetGroup);
-        ConverterCategories.Add(hashGroup);
+            Converters = Converters.Where(vm => vm is HashConverter).OrderBy(vm => vm.Name)
+        });
     }
 
     private void OnConverterTextChanged(object sender, byte[] data)
