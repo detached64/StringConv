@@ -29,7 +29,7 @@ internal partial class MainViewModel : ViewModelBase
     [ObservableProperty]
     private StatusMessage message;
     [ObservableProperty]
-    private List<StringConverter> converters = StringConverterProvider.Converters;
+    private List<StringConverter> converters = [.. StringConverterProvider.Converters.OrderBy(c => c.Name)];
     [ObservableProperty]
     [NotifyCanExecuteChangedFor(nameof(PinCommand))]
     private StringConverter selectedConverter;
@@ -79,22 +79,22 @@ internal partial class MainViewModel : ViewModelBase
         ConverterCategories.Add(new ConverterCategoryViewModel()
         {
             Name = GuiStrings.CharacterEncoding,
-            Converters = Converters.Where(vm => vm is CharEncodingConverter).OrderBy(vm => vm.Name),
+            Converters = Converters.Where(vm => vm is CharEncodingConverter)
         });
         ConverterCategories.Add(new ConverterCategoryViewModel()
         {
             Name = GuiStrings.DataEncoding,
-            Converters = Converters.Where(vm => vm is DataEncodingConverter).OrderBy(vm => vm.Name),
+            Converters = Converters.Where(vm => vm is DataEncodingConverter)
         });
         ConverterCategories.Add(new ConverterCategoryViewModel()
         {
             Name = GuiStrings.CodeSnippets,
-            Converters = Converters.Where(vm => vm is CodeSnippetConverter).OrderBy(vm => vm.Name)
+            Converters = Converters.Where(vm => vm is CodeSnippetConverter)
         });
         ConverterCategories.Add(new ConverterCategoryViewModel()
         {
             Name = GuiStrings.Hash,
-            Converters = Converters.Where(vm => vm is HashConverter).OrderBy(vm => vm.Name)
+            Converters = Converters.Where(vm => vm is HashConverter)
         });
     }
 
