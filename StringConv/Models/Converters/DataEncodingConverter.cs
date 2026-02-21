@@ -8,6 +8,7 @@ namespace StringConv.Models.Converters;
 
 internal abstract class DataEncodingConverter : StringConverter
 {
+    public override string Category => GuiStrings.DataEncoding;
     public override bool CanConvert => true;
 }
 

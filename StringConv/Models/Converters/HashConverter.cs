@@ -1,10 +1,14 @@
+using StringConv.I18n;
 using System;
 using System.IO.Hashing;
 using System.Security.Cryptography;
 
 namespace StringConv.Models.Converters;
 
-internal abstract class HashConverter : StringConverter;
+internal abstract class HashConverter : StringConverter
+{
+    public override string Category => GuiStrings.Hash;
+}
 
 internal sealed class CRC32Converter : HashConverter
 {

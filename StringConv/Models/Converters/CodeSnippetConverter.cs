@@ -3,7 +3,10 @@ using System.Text;
 
 namespace StringConv.Models.Converters;
 
-internal abstract class CodeSnippetConverter : StringConverter;
+internal abstract class CodeSnippetConverter : StringConverter
+{
+    public override string Category => GuiStrings.CodeSnippets;
+}
 
 internal sealed class AssemblyByteConverter : CodeSnippetConverter
 {

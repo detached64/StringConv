@@ -4,5 +4,5 @@ namespace StringConv.Models.Settings;
 
 internal sealed class AppSettings
 {
-    public List<int> PinnedConverterIndices { get; set; } = [];
+    public List<string> PinnedConverterIds { get; set; } = [];
 }

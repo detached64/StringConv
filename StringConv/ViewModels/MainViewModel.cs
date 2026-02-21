@@ -59,17 +59,14 @@ internal partial class MainViewModel : ViewModelBase
     private void ConfigurePinnedConverters()
     {
         PinnedConverterViewModels.Clear();
-        foreach (int index in _settingsService.Settings.PinnedConverterIndices)
+        foreach (string id in _settingsService.Settings.PinnedConverterIds)
         {
-            if (index >= 0 && index < Converters.Count)
+            StringConverter converter = StringConverterProvider.Find(id);
+            if (converter?.CanConvert == true)
             {
-                StringConverter converter = Converters[index];
-                if (converter?.CanConvert == true)
-                {
-                    ConverterViewModel cvm = new(converter);
-                    cvm.TextChanged += OnConverterTextChanged;
-                    PinnedConverterViewModels.Add(cvm);
-                }
+                ConverterViewModel cvm = new(converter);
+                cvm.TextChanged += OnConverterTextChanged;
+                PinnedConverterViewModels.Add(cvm);
             }
         }
     }
@@ -160,10 +157,9 @@ internal partial class MainViewModel : ViewModelBase
     [RelayCommand(CanExecute = nameof(CanPin))]
     private void Pin()
     {
-        int index = Converters.IndexOf(SelectedConverter);
-        if (index >= 0 && SelectedConverter.CanConvert && !_settingsService.Settings.PinnedConverterIndices.Contains(index))
+        if (SelectedConverter.CanConvert && !_settingsService.Settings.PinnedConverterIds.Contains(SelectedConverter.Id))
         {
-            _settingsService.Settings.PinnedConverterIndices.Add(index);
+            _settingsService.Settings.PinnedConverterIds.Add(SelectedConverter.Id);
             ConverterViewModel cvm = new(SelectedConverter);
             cvm.TextChanged += OnConverterTextChanged;
             PinnedConverterViewModels.Add(cvm);
@@ -178,10 +174,9 @@ internal partial class MainViewModel : ViewModelBase
         List<string> pinnedNames = [];
         foreach (StringConverter converter in SelectedConverters.OfType<StringConverter>())
         {
-            int index = Converters.IndexOf(converter);
-            if (index >= 0 && converter.CanConvert && !_settingsService.Settings.PinnedConverterIndices.Contains(index))
+            if (converter.CanConvert && !_settingsService.Settings.PinnedConverterIds.Contains(converter.Id))
             {
-                _settingsService.Settings.PinnedConverterIndices.Add(index);
+                _settingsService.Settings.PinnedConverterIds.Add(converter.Id);
                 ConverterViewModel cvm = new(converter);
                 cvm.TextChanged += OnConverterTextChanged;
                 PinnedConverterViewModels.Add(cvm);
@@ -198,10 +193,8 @@ internal partial class MainViewModel : ViewModelBase
     [RelayCommand]
     private void Remove(ConverterViewModel cvm)
     {
-        int index = Converters.IndexOf(cvm.Converter);
-        if (index >= 0 && _settingsService.Settings.PinnedConverterIndices.Contains(index))
+        if (_settingsService.Settings.PinnedConverterIds.Remove(cvm.Converter.Id))
         {
-            _settingsService.Settings.PinnedConverterIndices.Remove(index);
             cvm.TextChanged -= OnConverterTextChanged;
             PinnedConverterViewModels.Remove(cvm);
             WeakReferenceMessenger.Default.Send(new StatusMessage(string.Format(MsgStrings.ConverterRemoved, cvm.Converter.Name)));
@@ -212,7 +205,7 @@ internal partial class MainViewModel : ViewModelBase
     private void Clear()
     {
         PinnedConverterViewModels.Clear();
-        _settingsService.Settings.PinnedConverterIndices.Clear();
+        _settingsService.Settings.PinnedConverterIds.Clear();
         WeakReferenceMessenger.Default.Send(new StatusMessage(string.Format(MsgStrings.ConverterCleared)));
     }
 
@@ -244,10 +237,10 @@ internal partial class MainViewModel : ViewModelBase
     private static char GetHexChar(int value) => (char)(value < 10 ? '0' + value : 'A' + value - 10);
 
     private bool CanPin => SelectedConverter?.CanConvert == true &&
-        !_settingsService.Settings.PinnedConverterIndices.Contains(Converters.IndexOf(SelectedConverter));
+        !_settingsService.Settings.PinnedConverterIds.Contains(SelectedConverter.Id);
 
     private bool CanPinMultiple => SelectedConverters.OfType<StringConverter>()?.Any(c => c.CanConvert &&
-        !_settingsService.Settings.PinnedConverterIndices.Contains(Converters.IndexOf(c))) == true;
+        !_settingsService.Settings.PinnedConverterIds.Contains(c.Id)) == true;
 
     partial void OnSelectedConverterChanged(StringConverter value)
     {
