@@ -10,7 +10,7 @@ namespace StringConv.Services;
 
 internal sealed class SettingsService : ISettingsService
 {
-    private static readonly string DefaultPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), Assembly.GetExecutingAssembly().GetName().Name, "settings.json");
+    private static readonly string DefaultPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), Assembly.GetExecutingAssembly().GetName().Name, "Settings.json");
 
     private static readonly JsonSerializerOptions _options = new()
     {
