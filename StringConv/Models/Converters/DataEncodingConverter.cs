@@ -48,6 +48,18 @@ internal sealed class HexStringConverter : DataEncodingConverter
         if (string.IsNullOrEmpty(input))
             return input;
 
+        if (input.Length <= 512)
+        {
+            Span<char> buffer = stackalloc char[input.Length];
+            int index = 0;
+            foreach (char c in input)
+            {
+                if (!char.IsWhiteSpace(c))
+                    buffer[index++] = c;
+            }
+            return index == input.Length ? input : new string(buffer[..index]);
+        }
+
         int nonWhitespaceCount = 0;
         foreach (char c in input)
         {
