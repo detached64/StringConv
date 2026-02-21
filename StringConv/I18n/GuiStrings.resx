@@ -163,7 +163,7 @@
   <data name="SourceURL" xml:space="preserve">
     <value>Source Url</value>
   </data>
-  <data name="UnicodeString" xml:space="preserve">
-    <value>Unicode String</value>
+  <data name="UnicodeEscapeSequence" xml:space="preserve">
+    <value>Unicode Escape Sequence</value>
   </data>
 </root>

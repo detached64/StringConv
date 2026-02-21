@@ -259,11 +259,11 @@ namespace StringConv.I18n {
         }
         
         /// <summary>
-        ///   查找类似 Unicode String 的本地化字符串。
+        ///   查找类似 Unicode Escape Sequence 的本地化字符串。
         /// </summary>
-        public static string UnicodeString {
+        public static string UnicodeEscapeSequence {
             get {
-                return ResourceManager.GetString("UnicodeString", resourceCulture);
+                return ResourceManager.GetString("UnicodeEscapeSequence", resourceCulture);
             }
         }
     }
