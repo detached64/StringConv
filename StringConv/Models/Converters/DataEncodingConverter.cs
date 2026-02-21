@@ -45,15 +45,30 @@ internal sealed class HexStringConverter : DataEncodingConverter
 
     private static string RemoveWhitespaces(string input)
     {
-        StringBuilder sb = new();
+        if (string.IsNullOrEmpty(input))
+            return input;
+
+        int nonWhitespaceCount = 0;
         foreach (char c in input)
         {
             if (!char.IsWhiteSpace(c))
-            {
-                sb.Append(c);
-            }
+                nonWhitespaceCount++;
         }
-        return sb.ToString();
+
+        if (nonWhitespaceCount == input.Length)
+            return input;
+        if (nonWhitespaceCount == 0)
+            return string.Empty;
+
+        return string.Create(nonWhitespaceCount, input, (span, str) =>
+        {
+            int index = 0;
+            foreach (char c in str)
+            {
+                if (!char.IsWhiteSpace(c))
+                    span[index++] = c;
+            }
+        });
     }
 }
 
