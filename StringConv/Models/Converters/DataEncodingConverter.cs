@@ -2,6 +2,7 @@ using StringConv.I18n;
 using System;
 using System.Text;
 using System.Text.Json;
+using System.Text.RegularExpressions;
 
 namespace StringConv.Models.Converters;
 
@@ -91,7 +92,7 @@ internal sealed class UnicodeEscapeSequenceConverter : DataEncodingConverter
 
     public override byte[] FromString(string input)
     {
-        string result = JsonSerializer.Deserialize($"\"{input}\"", ConverterSerializerContext.Default.String);
+        string result = Regex.Unescape(input);
         return Encoding.Unicode.GetBytes(result);
     }
 
