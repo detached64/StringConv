@@ -74,3 +74,20 @@ internal sealed class UnicodeEscapeSequenceConverter : DataEncodingConverter
         return JsonSerializer.Serialize(result).Trim('"');
     }
 }
+
+internal sealed class UrlEncodingConverter : DataEncodingConverter
+{
+    public override string Name => GuiStrings.UrlEncoding;
+
+    public override byte[] FromString(string input)
+    {
+        string result = Uri.UnescapeDataString(input);
+        return Encoding.UTF8.GetBytes(result);
+    }
+
+    public override string ToString(byte[] input)
+    {
+        string result = Encoding.UTF8.GetString(input);
+        return Uri.EscapeDataString(result);
+    }
+}

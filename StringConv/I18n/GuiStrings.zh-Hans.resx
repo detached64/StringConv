@@ -186,4 +186,7 @@
   <data name="UnicodeEscapeSequence" xml:space="preserve">
     <value>Unicode 转义序列</value>
   </data>
+  <data name="UrlEncoding" xml:space="preserve">
+    <value>URL 编码</value>
+  </data>
 </root>

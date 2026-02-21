@@ -166,4 +166,7 @@
   <data name="UnicodeEscapeSequence" xml:space="preserve">
     <value>Unicode Escape Sequence</value>
   </data>
+  <data name="UrlEncoding" xml:space="preserve">
+    <value>URL Encoding</value>
+  </data>
 </root>

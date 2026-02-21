@@ -266,5 +266,14 @@ namespace StringConv.I18n {
                 return ResourceManager.GetString("UnicodeEscapeSequence", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   查找类似 URL Encoding 的本地化字符串。
+        /// </summary>
+        public static string UrlEncoding {
+            get {
+                return ResourceManager.GetString("UrlEncoding", resourceCulture);
+            }
+        }
     }
 }
