@@ -14,7 +14,7 @@ internal sealed class AssemblyByteConverter : CodeSnippetConverter
 
     public override string ToString(byte[] data)
     {
-        StringBuilder sb = new();
+        StringBuilder sb = new(data.Length * 5);
         sb.Append("array DB ");
         for (int i = 0; i < data.Length; i++)
         {
@@ -34,7 +34,7 @@ internal sealed class AssemblyStringConverter : CodeSnippetConverter
 
     public override string ToString(byte[] data)
     {
-        StringBuilder sb = new();
+        StringBuilder sb = new(data.Length * 4);
         for (int i = 0; i < data.Length; i++)
         {
             sb.Append($"{data[i]:X2}h");
@@ -53,7 +53,7 @@ internal sealed class CByteConverter : CodeSnippetConverter
 
     public override string ToString(byte[] data)
     {
-        StringBuilder sb = new();
+        StringBuilder sb = new(data.Length * 6);
         sb.Append("{ ");
         for (int i = 0; i < data.Length; i++)
         {
@@ -74,7 +74,7 @@ internal sealed class CStringConverter : CodeSnippetConverter
 
     public override string ToString(byte[] data)
     {
-        StringBuilder sb = new();
+        StringBuilder sb = new(data.Length * 4);
         sb.Append('\"');
         for (int i = 0; i < data.Length; i++)
         {
@@ -91,7 +91,7 @@ internal sealed class PascalByteConverter : CodeSnippetConverter
 
     public override string ToString(byte[] data)
     {
-        StringBuilder sb = new();
+        StringBuilder sb = new(data.Length * 5);
         sb.Append($"Array [1..{data.Length}] of Byte = ( ");
         for (int i = 0; i < data.Length; i++)
         {
@@ -112,7 +112,7 @@ internal sealed class Python3ByteConverter : CodeSnippetConverter
 
     public override string ToString(byte[] data)
     {
-        StringBuilder sb = new();
+        StringBuilder sb = new(data.Length * 4);
         sb.Append("b\"");
         for (int i = 0; i < data.Length; i++)
         {
