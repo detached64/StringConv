@@ -73,26 +73,14 @@ internal partial class MainViewModel : ViewModelBase
 
     private void ConfigureCategories()
     {
-        ConverterCategories.Add(new ConverterCategoryViewModel()
+        foreach (IGrouping<string, StringConverter> group in Converters.GroupBy(c => c.Category))
         {
-            Name = GuiStrings.CharacterEncoding,
-            Converters = Converters.Where(vm => vm is CharEncodingConverter)
-        });
-        ConverterCategories.Add(new ConverterCategoryViewModel()
-        {
-            Name = GuiStrings.DataEncoding,
-            Converters = Converters.Where(vm => vm is DataEncodingConverter)
-        });
-        ConverterCategories.Add(new ConverterCategoryViewModel()
-        {
-            Name = GuiStrings.CodeSnippets,
-            Converters = Converters.Where(vm => vm is CodeSnippetConverter)
-        });
-        ConverterCategories.Add(new ConverterCategoryViewModel()
-        {
-            Name = GuiStrings.Hash,
-            Converters = Converters.Where(vm => vm is HashConverter)
-        });
+            ConverterCategories.Add(new ConverterCategoryViewModel()
+            {
+                Name = group.Key,
+                Converters = group.OrderBy(c => c.Name)
+            });
+        }
     }
 
     private void OnConverterTextChanged(object sender, byte[] data)
