@@ -93,6 +93,7 @@ internal sealed class UnicodeEscapeSequenceConverter : DataEncodingConverter
 internal sealed class UrlEncodingConverter : DataEncodingConverter
 {
     public override string Name => GuiStrings.UrlEncoding;
+    public override string[] Dependencies => [$"{GuiStrings.CharacterEncoding}/65001"];   // UTF-8
 
     public override byte[] FromString(string input)
     {
