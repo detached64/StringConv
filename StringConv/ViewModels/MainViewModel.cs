@@ -255,8 +255,8 @@ internal partial class MainViewModel : ViewModelBase
     private bool CanPin => SelectedConverter?.CanConvert == true &&
         !_settingsService.Settings.PinnedConverterIds.Contains(SelectedConverter.Id);
 
-    private bool CanPinMultiple => SelectedConverters.OfType<StringConverter>()?.Any(c => c.CanConvert &&
-        !_settingsService.Settings.PinnedConverterIds.Contains(c.Id)) == true;
+    private bool CanPinMultiple => SelectedConverters.OfType<StringConverter>()
+        .Any(c => c.CanConvert && !_settingsService.Settings.PinnedConverterIds.Contains(c.Id)) == true;
 
     partial void OnSelectedConverterChanged(StringConverter value)
     {
