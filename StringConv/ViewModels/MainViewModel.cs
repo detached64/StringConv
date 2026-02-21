@@ -118,8 +118,9 @@ internal partial class MainViewModel : ViewModelBase
                 }
 
                 byte b = data[i];
-                span[spanIndex++] = GetHexChar(b >> 4);
-                span[spanIndex++] = GetHexChar(b & 0xF);
+                int hi = b >> 4, lo = b & 0xF;
+                span[spanIndex++] = (char)(hi < 10 ? '0' + hi : 'A' + hi - 10);
+                span[spanIndex++] = (char)(lo < 10 ? '0' + lo : 'A' + lo - 10);
             }
         });
     }
@@ -248,9 +249,6 @@ internal partial class MainViewModel : ViewModelBase
     {
         await _showDialogService.ShowDialogAsync<AboutView, AboutViewModel>(window);
     }
-
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static char GetHexChar(int value) => (char)(value < 10 ? '0' + value : 'A' + value - 10);
 
     private bool CanPin => SelectedConverter?.CanConvert == true &&
         !_settingsService.Settings.PinnedConverterIds.Contains(SelectedConverter.Id);
