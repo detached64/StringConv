@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 
 namespace StringConv.Models.Converters;
 
@@ -25,6 +26,11 @@ internal abstract class StringConverter
     /// </summary>
     /// <remarks>All dependencies will be pinned when the converter is pinned.</remarks>
     public virtual string[] Dependencies => [];
+    public virtual string Description => $@"Name: {Name}
+Category: {Category}
+Id: {Id}
+Can Convert: {CanConvert}
+Dependencies: {(Dependencies.Length > 0 ? string.Join(", ", Dependencies) : "None")}";
 
     public virtual byte[] FromString(string value)
     {
