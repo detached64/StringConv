@@ -160,8 +160,8 @@
   <data name="Remove" xml:space="preserve">
     <value>Remove</value>
   </data>
-  <data name="SourceURL" xml:space="preserve">
-    <value>Source Url</value>
+  <data name="SourceUrl" xml:space="preserve">
+    <value>Source URL</value>
   </data>
   <data name="UnicodeEscapeSequence" xml:space="preserve">
     <value>Unicode Escape Sequence</value>

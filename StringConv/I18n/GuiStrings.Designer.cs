@@ -250,11 +250,11 @@ namespace StringConv.I18n {
         }
         
         /// <summary>
-        ///   查找类似 Source Url 的本地化字符串。
+        ///   查找类似 Source URL 的本地化字符串。
         /// </summary>
-        public static string SourceURL {
+        public static string SourceUrl {
             get {
-                return ResourceManager.GetString("SourceURL", resourceCulture);
+                return ResourceManager.GetString("SourceUrl", resourceCulture);
             }
         }
         

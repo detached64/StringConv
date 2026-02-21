@@ -34,7 +34,7 @@
         <HyperlinkButton Padding="0"
                          Command="{Binding OpenUrlCommand}"
                          CommandParameter="{Binding SourceUrl}"
-                         Content="{x:Static i:GuiStrings.SourceURL}">
+                         Content="{x:Static i:GuiStrings.SourceUrl}">
             <HyperlinkButton.Styles>
                 <Style Selector="HyperlinkButton">
                     <Setter Property="TextBlock.TextDecorations" Value="" />
