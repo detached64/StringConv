@@ -78,7 +78,7 @@ internal partial class MainViewModel : ViewModelBase
             ConverterCategories.Add(new ConverterCategoryViewModel()
             {
                 Name = group.Key,
-                Converters = group.OrderBy(c => c.Name)
+                Converters = group
             });
         }
     }
