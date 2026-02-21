@@ -133,12 +133,6 @@
   <data name="DataEncoding" xml:space="preserve">
     <value>Data Encoding</value>
   </data>
-  <data name="Pin" xml:space="preserve">
-    <value>Pin</value>
-  </data>
-  <data name="PinSelected" xml:space="preserve">
-    <value>Pin Selected</value>
-  </data>
   <data name="Hash" xml:space="preserve">
     <value>Hash</value>
   </data>
@@ -154,6 +148,12 @@
   <data name="Paste" xml:space="preserve">
     <value>Paste</value>
   </data>
+  <data name="Pin" xml:space="preserve">
+    <value>Pin</value>
+  </data>
+  <data name="PinSelected" xml:space="preserve">
+    <value>Pin Selected</value>
+  </data>
   <data name="Python3ByteString" xml:space="preserve">
     <value>Python3 Byte String</value>
   </data>
@@ -162,5 +162,8 @@
   </data>
   <data name="SourceURL" xml:space="preserve">
     <value>Source Url</value>
+  </data>
+  <data name="UnicodeString" xml:space="preserve">
+    <value>Unicode String</value>
   </data>
 </root>

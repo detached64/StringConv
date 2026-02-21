@@ -153,12 +153,6 @@
   <data name="DataEncoding" xml:space="preserve">
     <value>数据编码</value>
   </data>
-  <data name="Pin" xml:space="preserve">
-    <value>固定</value>
-  </data>
-  <data name="PinSelected" xml:space="preserve">
-    <value>固定所选</value>
-  </data>
   <data name="Hash" xml:space="preserve">
     <value>哈希</value>
   </data>
@@ -174,6 +168,12 @@
   <data name="Paste" xml:space="preserve">
     <value>粘贴</value>
   </data>
+  <data name="Pin" xml:space="preserve">
+    <value>固定</value>
+  </data>
+  <data name="PinSelected" xml:space="preserve">
+    <value>固定所选</value>
+  </data>
   <data name="Python3ByteString" xml:space="preserve">
     <value>Python3 字节数组</value>
   </data>
@@ -182,5 +182,8 @@
   </data>
   <data name="SourceURL" xml:space="preserve">
     <value>开源网址</value>
+  </data>
+  <data name="UnicodeString" xml:space="preserve">
+    <value>Unicode 字符串</value>
   </data>
 </root>
