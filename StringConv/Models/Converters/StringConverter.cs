@@ -31,12 +31,9 @@ Id: {Id}
 Can Convert: {CanConvert}
 Dependencies: {(Dependencies.Length > 0 ? string.Join(", ", Dependencies) : "None")}";
 
-    public virtual byte[] FromString(string value)
-    {
-        throw new NotImplementedException();
-    }
+    public abstract string ToString(byte[] data);
 
-    public virtual string ToString(byte[] data)
+    public virtual byte[] FromString(string value)
     {
         throw new NotImplementedException();
     }
