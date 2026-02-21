@@ -79,14 +79,14 @@ internal sealed class UnicodeEscapeSequenceConverter : DataEncodingConverter
 
     public override byte[] FromString(string input)
     {
-        string result = JsonSerializer.Deserialize<string>($"\"{input}\"");
+        string result = JsonSerializer.Deserialize($"\"{input}\"", ConverterSerializerContext.Default.String);
         return Encoding.Unicode.GetBytes(result);
     }
 
     public override string ToString(byte[] input)
     {
         string result = Encoding.Unicode.GetString(input);
-        return JsonSerializer.Serialize(result).Trim('"');
+        return JsonSerializer.Serialize(result, ConverterSerializerContext.Default.String).Trim('"');
     }
 }
 
