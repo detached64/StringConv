@@ -145,14 +145,42 @@ internal partial class MainViewModel : ViewModelBase
     [RelayCommand(CanExecute = nameof(CanPin))]
     private void Pin()
     {
+        List<string> pinnedNames = [];
         if (SelectedConverter.CanConvert && !_settingsService.Settings.PinnedConverterIds.Contains(SelectedConverter.Id))
         {
             _settingsService.Settings.PinnedConverterIds.Add(SelectedConverter.Id);
             ConverterViewModel cvm = new(SelectedConverter);
             cvm.TextChanged += OnConverterTextChanged;
             PinnedConverterViewModels.Add(cvm);
-            WeakReferenceMessenger.Default.Send(new StatusMessage(string.Format(MsgStrings.ConverterPinned, SelectedConverter.Name)));
+            pinnedNames.Add(SelectedConverter.Name);
             cvm.UpdateToString(InputData);
+        }
+        if (SelectedConverter.Dependencies.Length > 0)
+        {
+            foreach (string dependencyId in SelectedConverter.Dependencies)
+            {
+                StringConverter dependency = StringConverterProvider.Find(dependencyId);
+                if (dependency.CanConvert && !_settingsService.Settings.PinnedConverterIds.Contains(dependency.Id))
+                {
+                    _settingsService.Settings.PinnedConverterIds.Add(dependency.Id);
+                    ConverterViewModel cvm = new(dependency);
+                    cvm.TextChanged += OnConverterTextChanged;
+                    PinnedConverterViewModels.Add(cvm);
+                    pinnedNames.Add(dependency.Name);
+                    cvm.UpdateToString(InputData);
+                }
+            }
+        }
+        switch (pinnedNames.Count)
+        {
+            case 0:
+                break;
+            case 1:
+                WeakReferenceMessenger.Default.Send(new StatusMessage(string.Format(MsgStrings.ConverterPinned, pinnedNames[0])));
+                break;
+            default:
+                WeakReferenceMessenger.Default.Send(new StatusMessage(string.Format(MsgStrings.ConvertersPinned, pinnedNames.Count, string.Join(", ", pinnedNames))));
+                break;
         }
     }
 

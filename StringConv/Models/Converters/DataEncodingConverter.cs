@@ -61,6 +61,7 @@ internal sealed class HexStringConverter : DataEncodingConverter
 internal sealed class UnicodeStringConverter : DataEncodingConverter
 {
     public override string Name => GuiStrings.UnicodeString;
+    public override string[] Dependencies => [$"{GuiStrings.CharacterEncoding}/1200"];   // UTF-16LE
 
     public override byte[] FromString(string input)
     {
