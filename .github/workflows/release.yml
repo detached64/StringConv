@@ -54,4 +54,3 @@ jobs:
             StringConv-${{ github.ref_name }}-linux-x64.zip/*
           draft: false
           prerelease: false
-          generate_release_notes: true
