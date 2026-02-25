@@ -178,6 +178,15 @@ namespace StringConv.I18n {
         }
         
         /// <summary>
+        ///   查找类似 File 的本地化字符串。
+        /// </summary>
+        public static string File {
+            get {
+                return ResourceManager.GetString("File", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Hash 的本地化字符串。
         /// </summary>
         public static string Hash {
@@ -201,6 +210,15 @@ namespace StringConv.I18n {
         public static string HexString {
             get {
                 return ResourceManager.GetString("HexString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Load File 的本地化字符串。
+        /// </summary>
+        public static string LoadFile {
+            get {
+                return ResourceManager.GetString("LoadFile", resourceCulture);
             }
         }
         
@@ -255,6 +273,15 @@ namespace StringConv.I18n {
         public static string Remove {
             get {
                 return ResourceManager.GetString("Remove", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Save File 的本地化字符串。
+        /// </summary>
+        public static string SaveFile {
+            get {
+                return ResourceManager.GetString("SaveFile", resourceCulture);
             }
         }
         

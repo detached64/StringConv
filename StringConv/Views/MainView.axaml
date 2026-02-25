@@ -46,6 +46,10 @@
 
     <DockPanel>
         <Menu DockPanel.Dock="Top">
+            <MenuItem Header="{x:Static i:GuiStrings.File}">
+                <MenuItem Command="{Binding LoadFileCommand}" Header="{x:Static i:GuiStrings.LoadFile}" />
+                <MenuItem Command="{Binding SaveFileCommand}" Header="{x:Static i:GuiStrings.SaveFile}" />
+            </MenuItem>
             <MenuItem Command="{Binding ShowAboutCommand}"
                       CommandParameter="{Binding $parent[Window]}"
                       Header="{x:Static i:GuiStrings.About}" />

@@ -156,6 +156,9 @@
   <data name="DataEncoding" xml:space="preserve">
     <value>数据编码</value>
   </data>
+  <data name="File" xml:space="preserve">
+    <value>文件</value>
+  </data>
   <data name="Hash" xml:space="preserve">
     <value>哈希</value>
   </data>
@@ -164,6 +167,9 @@
   </data>
   <data name="HexString" xml:space="preserve">
     <value>十六进制字符串</value>
+  </data>
+  <data name="LoadFile" xml:space="preserve">
+    <value>加载文件</value>
   </data>
   <data name="PascalByteArray" xml:space="preserve">
     <value>Pascal 字节数组</value>
@@ -182,6 +188,9 @@
   </data>
   <data name="Remove" xml:space="preserve">
     <value>移除</value>
+  </data>
+  <data name="SaveFile" xml:space="preserve">
+    <value>保存文件</value>
   </data>
   <data name="SourceUrl" xml:space="preserve">
     <value>开源网址</value>

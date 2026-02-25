@@ -1,5 +1,6 @@
 using Avalonia.Controls;
 using Avalonia.Media;
+using Avalonia.Platform.Storage;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
@@ -11,6 +12,7 @@ using StringConv.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -247,6 +249,57 @@ internal partial class MainViewModel : ViewModelBase
     private async Task ShowAboutAsync(Window window)
     {
         await _showDialogService.ShowDialogAsync<AboutView, AboutViewModel>(window);
+    }
+
+    [RelayCommand]
+    private async Task LoadFileAsync()
+    {
+        IReadOnlyList<IStorageFile> files = await App.Top.StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions()
+        {
+            Title = GuiStrings.LoadFile,
+            AllowMultiple = false
+        });
+        if (files?.Count == 1)
+        {
+            IStorageFile file = files[0];
+            try
+            {
+                await using Stream stream = await file.OpenReadAsync();
+                byte[] data = new byte[stream.Length];
+                await stream.ReadExactlyAsync(data);
+                OnConverterTextChanged(this, data);
+            }
+            catch (Exception ex)
+            {
+                WeakReferenceMessenger.Default.Send(new StatusMessage(string.Format(MsgStrings.LoadFileError, ex.Message), Brushes.Red));
+            }
+        }
+    }
+
+    [RelayCommand]
+    private async Task SaveFileAsync()
+    {
+        if (InputData == null || InputData.Length == 0)
+        {
+            return;
+        }
+        IStorageFile file = await App.Top.StorageProvider.SaveFilePickerAsync(new FilePickerSaveOptions()
+        {
+            Title = GuiStrings.SaveFile,
+            SuggestedFileName = "data.bin"
+        });
+        if (file != null)
+        {
+            try
+            {
+                await using Stream stream = await file.OpenWriteAsync();
+                await stream.WriteAsync(InputData);
+            }
+            catch (Exception ex)
+            {
+                WeakReferenceMessenger.Default.Send(new StatusMessage(string.Format(MsgStrings.SaveFileError, ex.Message), Brushes.Red));
+            }
+        }
     }
 
     private bool CanPin => SelectedConverter?.CanConvert == true &&

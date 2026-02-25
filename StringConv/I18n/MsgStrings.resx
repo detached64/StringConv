@@ -124,6 +124,12 @@
   <data name="InputEmpty" xml:space="preserve">
     <value>Input is empty.</value>
   </data>
+  <data name="LoadFileError" xml:space="preserve">
+    <value>Loading file failed: {0}</value>
+  </data>
+  <data name="SaveFileError" xml:space="preserve">
+    <value>Saving file failed: {0}</value>
+  </data>
   <data name="TextCopied" xml:space="preserve">
     <value>Text copied to clipboard.</value>
   </data>

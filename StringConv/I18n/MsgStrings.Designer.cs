@@ -142,6 +142,24 @@ namespace StringConv.I18n {
         }
         
         /// <summary>
+        ///   查找类似 Loading file failed: {0} 的本地化字符串。
+        /// </summary>
+        public static string LoadFileError {
+            get {
+                return ResourceManager.GetString("LoadFileError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Saving file failed: {0} 的本地化字符串。
+        /// </summary>
+        public static string SaveFileError {
+            get {
+                return ResourceManager.GetString("SaveFileError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Text copied to clipboard. 的本地化字符串。
         /// </summary>
         public static string TextCopied {
