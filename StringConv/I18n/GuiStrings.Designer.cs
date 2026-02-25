@@ -142,6 +142,15 @@ namespace StringConv.I18n {
         }
         
         /// <summary>
+        ///   查找类似 C# Byte Array 的本地化字符串。
+        /// </summary>
+        public static string CSharpByteArray {
+            get {
+                return ResourceManager.GetString("CSharpByteArray", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 C String 的本地化字符串。
         /// </summary>
         public static string CString {

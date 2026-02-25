@@ -144,6 +144,9 @@
   <data name="CopyData" xml:space="preserve">
     <value>复制数据</value>
   </data>
+  <data name="CSharpByteArray" xml:space="preserve">
+    <value>C# 字节数组</value>
+  </data>
   <data name="CString" xml:space="preserve">
     <value>C 语言字符串</value>
   </data>

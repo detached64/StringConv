@@ -124,6 +124,9 @@
   <data name="CopyData" xml:space="preserve">
     <value>Copy Data</value>
   </data>
+  <data name="CSharpByteArray" xml:space="preserve">
+    <value>C# Byte Array</value>
+  </data>
   <data name="CString" xml:space="preserve">
     <value>C String</value>
   </data>

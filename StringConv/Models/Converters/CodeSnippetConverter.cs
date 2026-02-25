@@ -122,3 +122,24 @@ internal sealed class Python3ByteConverter : CodeSnippetConverter
         return sb.ToString();
     }
 }
+
+internal sealed class CSharpByteConverter : CodeSnippetConverter
+{
+    public override string Name => GuiStrings.CSharpByteArray;
+
+    public override string ToString(byte[] data)
+    {
+        StringBuilder sb = new(data.Length * 6);
+        sb.Append("new byte[] { ");
+        for (int i = 0; i < data.Length; i++)
+        {
+            sb.Append($"0x{data[i]:X2}");
+            if (i < data.Length - 1)
+            {
+                sb.Append(", ");
+            }
+        }
+        sb.Append(" }");
+        return sb.ToString();
+    }
+}
