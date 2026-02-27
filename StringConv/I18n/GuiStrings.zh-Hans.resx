@@ -135,6 +135,9 @@
   <data name="Clear" xml:space="preserve">
     <value>清空</value>
   </data>
+  <data name="ClearData" xml:space="preserve">
+    <value>清空数据</value>
+  </data>
   <data name="CodeSnippets" xml:space="preserve">
     <value>代码片段</value>
   </data>

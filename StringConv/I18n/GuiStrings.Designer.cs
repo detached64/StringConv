@@ -115,6 +115,15 @@ namespace StringConv.I18n {
         }
         
         /// <summary>
+        ///   查找类似 Clear Data 的本地化字符串。
+        /// </summary>
+        public static string ClearData {
+            get {
+                return ResourceManager.GetString("ClearData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Code Snippets 的本地化字符串。
         /// </summary>
         public static string CodeSnippets {

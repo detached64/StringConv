@@ -35,7 +35,6 @@ internal partial class ConverterViewModel(StringConverter converter) : ViewModel
             else
             {
                 TextChanged?.Invoke(this, []);
-                WeakReferenceMessenger.Default.Send(new StatusMessage(MsgStrings.InputEmpty, Brushes.Orange));
             }
         }
         catch (Exception ex)
@@ -59,5 +58,10 @@ internal partial class ConverterViewModel(StringConverter converter) : ViewModel
         {
             isUpdating = false;
         }
+    }
+
+    public void Clear()
+    {
+        Text = string.Empty;
     }
 }

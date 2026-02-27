@@ -115,6 +115,9 @@
   <data name="Clear" xml:space="preserve">
     <value>Clear</value>
   </data>
+  <data name="ClearData" xml:space="preserve">
+    <value>Clear Data</value>
+  </data>
   <data name="CodeSnippets" xml:space="preserve">
     <value>Code Snippets</value>
   </data>

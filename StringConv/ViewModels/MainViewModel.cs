@@ -302,6 +302,19 @@ internal partial class MainViewModel : ViewModelBase
         }
     }
 
+    [RelayCommand]
+    private void ClearData()
+    {
+        InputData = null;
+        HexText = string.Empty;
+        CopyText = string.Empty;
+        foreach (ConverterViewModel cvm in PinnedConverterViewModels)
+        {
+            cvm.Clear();
+        }
+        WeakReferenceMessenger.Default.Send(new StatusMessage(MsgStrings.DataCleared));
+    }
+
     private bool CanPin => SelectedConverter?.CanConvert == true &&
         !_settingsService.Settings.PinnedConverterIds.Contains(SelectedConverter.Id);
 

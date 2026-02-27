@@ -49,6 +49,7 @@
             <MenuItem Header="{x:Static i:GuiStrings.File}">
                 <MenuItem Command="{Binding LoadFileCommand}" Header="{x:Static i:GuiStrings.LoadFile}" />
                 <MenuItem Command="{Binding SaveFileCommand}" Header="{x:Static i:GuiStrings.SaveFile}" />
+                <MenuItem Command="{Binding ClearDataCommand}" Header="{x:Static i:GuiStrings.ClearData}" />
             </MenuItem>
             <MenuItem Command="{Binding ShowAboutCommand}"
                       CommandParameter="{Binding $parent[Window]}"

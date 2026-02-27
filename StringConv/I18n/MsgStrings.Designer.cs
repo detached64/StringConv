@@ -124,20 +124,20 @@ namespace StringConv.I18n {
         }
         
         /// <summary>
+        ///   查找类似 Data cleared. 的本地化字符串。
+        /// </summary>
+        public static string DataCleared {
+            get {
+                return ResourceManager.GetString("DataCleared", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Hex string must have even length. 的本地化字符串。
         /// </summary>
         public static string HexStringMustHaveEvenLength {
             get {
                 return ResourceManager.GetString("HexStringMustHaveEvenLength", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Input is empty. 的本地化字符串。
-        /// </summary>
-        public static string InputEmpty {
-            get {
-                return ResourceManager.GetString("InputEmpty", resourceCulture);
             }
         }
         

@@ -138,11 +138,11 @@
   <data name="CopyError" xml:space="preserve">
     <value>复制错误：{0}</value>
   </data>
+  <data name="DataCleared" xml:space="preserve">
+    <value>数据已清空。</value>
+  </data>
   <data name="HexStringMustHaveEvenLength" xml:space="preserve">
     <value>十六进制字符串长度必须为偶数。</value>
-  </data>
-  <data name="InputEmpty" xml:space="preserve">
-    <value>输入为空。</value>
   </data>
   <data name="LoadFileError" xml:space="preserve">
     <value>加载文件失败：{0}</value>
