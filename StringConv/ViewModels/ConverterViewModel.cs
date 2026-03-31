@@ -13,9 +13,10 @@ internal partial class ConverterViewModel(StringConverter converter) : ViewModel
     private bool isUpdating;
 
     [ObservableProperty]
-    private string name = converter.Name;
+    public partial string Name { get; set; } = converter.Name;
+
     [ObservableProperty]
-    private string text;
+    public partial string Text { get; set; }
 
     public StringConverter Converter => converter;
     public event EventHandler<byte[]> TextChanged;
@@ -26,9 +27,9 @@ internal partial class ConverterViewModel(StringConverter converter) : ViewModel
             return;
         try
         {
-            if (!string.IsNullOrEmpty(text))
+            if (!string.IsNullOrEmpty(Text))
             {
-                byte[] data = converter.FromString(text);
+                byte[] data = converter.FromString(Text);
                 TextChanged?.Invoke(this, data);
                 WeakReferenceMessenger.Default.Send(new StatusMessage(MsgStrings.ConversionSuccessful));
             }

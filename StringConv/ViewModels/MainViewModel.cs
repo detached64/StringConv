@@ -24,23 +24,30 @@ internal partial class MainViewModel : ViewModelBase
     private readonly ISettingsService _settingsService;
     private byte[] InputData;
     [ObservableProperty]
-    private string hexText;
+    public partial string HexText { get; set; }
+
     [ObservableProperty]
-    private string copyText;
+    public partial string CopyText { get; set; }
+
     [ObservableProperty]
-    private StatusMessage message;
+    public partial StatusMessage Message { get; set; }
+
     [ObservableProperty]
-    private List<StringConverter> converters = [.. StringConverterProvider.Converters.OrderBy(c => c.Name)];
+    public partial List<StringConverter> Converters { get; set; } = [.. StringConverterProvider.Converters.OrderBy(c => c.Name)];
+
     [ObservableProperty]
     [NotifyCanExecuteChangedFor(nameof(PinCommand))]
-    private StringConverter selectedConverter;
+    public partial StringConverter SelectedConverter { get; set; }
+
     [ObservableProperty]
     [NotifyCanExecuteChangedFor(nameof(PinMultipleCommand))]
-    private ObservableCollection<object> selectedConverters = [];
+    public partial ObservableCollection<object> SelectedConverters { get; set; } = [];
+
     [ObservableProperty]
-    private ObservableCollection<ConverterViewModel> pinnedConverterViewModels = [];
+    public partial ObservableCollection<ConverterViewModel> PinnedConverterViewModels { get; set; } = [];
+
     [ObservableProperty]
-    private ObservableCollection<ConverterCategoryViewModel> converterCategories = [];
+    public partial ObservableCollection<ConverterCategoryViewModel> ConverterCategories { get; set; } = [];
 
     public MainViewModel(IShowDialogService showDialogService, ISettingsService settingsService)
     {
